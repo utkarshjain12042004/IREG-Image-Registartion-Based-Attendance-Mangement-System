@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image
 from PIL import ImageTk
-from Start_Attendance import Start_Attendance
+from Account_Management import Account_Management
 
 
 # Creating a class for the UI
@@ -14,7 +14,7 @@ class Face_Recognition_System:
         self.root.geometry("400x500+0+0")
         self.root.title("IREG")
         
-        # Main frame
+        # Main frame                    g
         mainFrame = Frame(bd=2, bg="White", relief = RIDGE)
         mainFrame.place(x=2, y=2, width=395, height=495)
 
@@ -34,7 +34,7 @@ class Face_Recognition_System:
 
         #======================================== Adding in the buttons ========================================#
         # Start Attendance Button
-        start_Attendance_Button = Button(Button_Frame, text="Start Attendance",command = self.start_attendance, cursor="hand2", font=("Sans-Serif", 15, "bold"), bg="Dark Blue", fg="White")
+        start_Attendance_Button = Button(Button_Frame, text="Start Attendance", cursor="hand2", font=("Sans-Serif", 15, "bold"), bg="Dark Blue", fg="White")
         start_Attendance_Button.place(x=5,y=5, width=287, height=50)
 
         # View Attendance
@@ -42,7 +42,7 @@ class Face_Recognition_System:
         view_Attendance_Button.place(x=5,y=60, width=287, height=50)
 
         # Account Management Button
-        account_Management_Button = Button(Button_Frame, text="Account Management", cursor="hand2", font=("Sans-Serif", 15, "bold"), bg="Dark Blue", fg="White")
+        account_Management_Button = Button(Button_Frame, text="Account Management", command = self.Account_Management, cursor="hand2", font=("Sans-Serif", 15, "bold"), bg="Dark Blue", fg="White")
         account_Management_Button.place(x=5,y=115, width=287, height=50)
 
         # Exit Button
@@ -55,9 +55,9 @@ class Face_Recognition_System:
 
         # =======================================================================================================#
         # This method calls the Start attendance page and allows it to be displayed on the screen
-    def start_attendance(self):
+    def Account_Management(self):
         self.new_window = Toplevel(self.root)
-        self.app = Start_Attendance(self.new_window)
+        self.app = Account_Management(self.new_window)
 
 
 
