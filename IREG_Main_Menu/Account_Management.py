@@ -37,9 +37,9 @@ class Account_Management:
         go_back_button.place(x=307, y=285)
 #==========================================================================================================================================#
     # This method calls the Start attendance page and allows it to be displayed on the screen
-    def Manage_Teacher_Account_Button(self):
+    def back_Button(self):
         self.new_window = Toplevel(self.root)
-        self.app = Student_Account_Management(self.new_window)
+        self.app = Face_Recognition_System(self.new_window)
 
 
 # This piece of code helps in calling class Face_Recognition_System
