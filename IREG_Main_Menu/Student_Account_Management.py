@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image
 from PIL import ImageTk
+from tkinter import messagebox
 import mysql.connector
 
 
@@ -161,11 +162,11 @@ class Student_Account_Management:
         search_entry_textbox.grid(row=0, column=2, padx=10, pady=5, sticky=W)
 
         # Adding a Search button
-        search_button = Button(Search_Frame, width=9, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Blue", fg="White")
+        search_button = Button(Search_Frame, width=9, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
         search_button.grid(row=0, column=3,padx=10, pady=5, sticky=W)
         
         # Adding a Show All button
-        show_all_button = Button(Search_Frame, width=9, text="Show All", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Blue", fg="White")
+        show_all_button = Button(Search_Frame, width=9, text="Show All", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
         show_all_button.grid(row=0, column=4, padx=10, pady=5, sticky=W)
 #============================================================================================================================================================================================================
         # Table Frame
@@ -176,7 +177,7 @@ class Student_Account_Management:
         scroll_x = ttk.Scrollbar(Table_Frame, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(Table_Frame, orient=VERTICAL)
         
-        self.student_table = ttk.Treeview(Table_Frame, column=("std_ID", "first_name", "last_name", "year_of_admission", "date_of_birth", "father_first_name", "father_last_name", "father_email", "mother_first_name", "mother_last_name", "mother_email"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+        self.student_table = ttk.Treeview(Table_Frame, column=("std_ID", "first_name", "last_name", "email", "year_of_admission", "date_of_birth", "father_first_name", "father_last_name", "father_email", "mother_first_name", "mother_last_name", "mother_email"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
         
         scroll_x.pack(side=BOTTOM, fill=X)
         scroll_y.pack(side=RIGHT, fill=Y)
@@ -186,6 +187,7 @@ class Student_Account_Management:
         self.student_table.heading("std_ID", text="Student ID")
         self.student_table.heading("first_name", text="First Name")
         self.student_table.heading("last_name", text="Last Name")
+        self.student_table.heading("email", text="Email")
         self.student_table.heading("year_of_admission", text="Year Of Admission")
         self.student_table.heading("date_of_birth", text="Date Of Birth")
         self.student_table.heading("father_first_name", text="Father's First Name")
@@ -197,9 +199,10 @@ class Student_Account_Management:
         self.student_table["show"] = "headings"
 
         
-        self.student_table.column("std_ID", width=70)
+        self.student_table.column("std_ID", width=68)
         self.student_table.column("first_name", width=130)
         self.student_table.column("last_name", width=130)
+        self.student_table.column("email", width=130)
         self.student_table.column("year_of_admission", width=120)
         self.student_table.column("date_of_birth", width=120)
         self.student_table.column("father_first_name", width=130) 
@@ -209,7 +212,9 @@ class Student_Account_Management:
         self.student_table.column("mother_last_name", width=130)
         self.student_table.column("mother_email", width=100)
 
+        self.student_table.bind("<ButtonRelease>", self.get_cursor)
         self.student_table.pack(fill=BOTH, expand=1)
+        self.fetch_data()
 # ==========================================================================================================================================#
         # Adding a student face frame. This frame will show the video footage
         Student_Face_Capture_Frame = Frame(mainFrame, bd=2, bg="White", relief = RIDGE)
@@ -225,7 +230,7 @@ class Student_Account_Management:
         student_face_label.place(x=300, y=5)
 
         # Adding a capture face button below the label
-        capture_face_button = Button(Student_Face_Capture_Frame, width=14, cursor="hand2", text="Capture Face", font=("Segoe UI Variable", 12, "bold"), bg="Blue", fg="White")
+        capture_face_button = Button(Student_Face_Capture_Frame, width=14, cursor="hand2", text="Capture Face", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
         capture_face_button.place(x=290, y=30)
 # ==========================================================================================================================================#
         # Adding a button frame which will have the save, update and delete button
@@ -233,30 +238,88 @@ class Student_Account_Management:
         Button_Frame.place(x=873, y=385, width=203, height=247 )
 
         # Add Student button
-        add_student_button = Button(Button_Frame, width=18, height=3, text="Add Student", font=("Segoe UI Variable", 12, "bold"), bg="Blue", fg="White")
+        add_student_button = Button(Button_Frame, width=18, height=3, command=self.add_student_button, text="Add Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
         add_student_button.grid(row=0, padx=5, pady=5)
         
         # Update button
-        update_button = Button(Button_Frame, width=18, height=3, text="Update Student Details", font=("Segoe UI Variable", 12, "bold"), bg="Blue", fg="White")
+        update_button = Button(Button_Frame, width=18, height=3, text="Update Student Details", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
         update_button.grid(row=1, padx=5, pady=5)
         
         # Delete button
-        delete_button = Button(Button_Frame, width=18, height=3, text="Delete Student", font=("Segoe UI Variable", 12, "bold"), bg="Blue", fg="White")
+        delete_button = Button(Button_Frame, width=18, height=3, text="Delete Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
         delete_button.grid(row=2, padx=5, pady=5)
 #                                                            END OF UI DESIGN
 #===========================================================================================================================================#
 #############################################################################################################################################
 #===========================================================================================================================================#
 #                                                      BUTTON IMPLEMENTATION FUNCTIONS
-
+# ------------------------------------------------------------------------------------------------------------------------------------------#
     # Function for adding in the data when the user clicks on the add student button
-    #def add_student_button(self):
-    #    if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
-    #        messagebox.showerror("Error", "All fields are required", parent=self.root)
-    #    else:
-    #        try:
-    #            conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="advance_face_recognition_project")
-    #            my_cursor = conn.cursor()
+    def add_student_button(self):
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+            messagebox.showerror("Error", "All fields are required", parent=self.root)
+        else:
+            try:
+                conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                my_cursor = conn.cursor()
+                my_cursor.execute("INSERT INTO tbl_student VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(
+                                                                                                         self.var_student_ID.get(),
+                                                                                                         self.var_first_name.get(),
+                                                                                                         self.var_last_name.get(),
+                                                                                                         self.var_student_email.get(),
+                                                                                                         self.var_year_of_admission.get(),
+                                                                                                         self.var_date_of_birth.get(),
+                                                                                                         self.var_father_first_name.get(),
+                                                                                                         self.var_father_last_name.get(),
+                                                                                                         self.var_father_email.get(),
+                                                                                                         self.var_mother_first_name.get(),
+                                                                                                         self.var_mother_last_name.get(),
+                                                                                                         self.var_mother_email.get()
+                                                                                                        ))
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                messagebox.showinfo("Success", "Student details have been added succesfully", parent=self.root)
+            except Exception as es:
+                messagebox.showerror("Error", f"Due To : {str(es)}", parent=self.root)
+
+    # Funtion to fetch the date in the table frame created
+    def fetch_data(self):
+        conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+        my_cursor = conn.cursor()
+        my_cursor.execute("SELECT * FROM tbl_student")
+        data = my_cursor.fetchall()
+
+        if len(data) != 0:
+            self.student_table.delete(*self.student_table.get_children())
+            for i in data:
+                self.student_table.insert("", END, values=i)
+            conn.commit()
+        conn.close()
+
+    # Get Cursor
+    def get_cursor(self, event=""):
+        cursor_focus = self.student_table.focus()
+        content = self.student_table.item(cursor_focus)
+        data = content["values"]
+
+        self.var_student_ID.set(data[0]),
+        self.var_student_email.set(data[1]),
+        self.var_first_name.set(data[2]),
+        self.var_last_name.set(data[3]),
+        self.var_year_of_admission.set(data[4]),
+        self.var_date_of_birth.set(data[5]),
+        self.var_father_first_name.set(data[6]),
+        self.var_father_last_name.set(data[7]),
+        self.var_father_email.set(data[8]),
+        self.var_mother_first_name.set(data[9]),
+        self.var_mother_last_name.set(data[10]),
+        self.var_mother_email.set(data[11])
+# ------------------------------------------------------------------------------------------------------------------------------------------#
+    # Update button implementation
+
+
+
 
 
 
