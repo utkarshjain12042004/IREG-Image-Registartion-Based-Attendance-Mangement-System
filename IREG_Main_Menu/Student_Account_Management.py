@@ -5,6 +5,7 @@ from PIL import Image
 from PIL import ImageTk
 from tkinter import messagebox
 import mysql.connector
+import cv2
 
 
 class Student_Account_Management:
@@ -14,12 +15,12 @@ class Student_Account_Management:
         self.root.title("Student_Account Management")
 
         # Main Frame: This will contain all the buttons
-        mainFrame = Frame(bd=2, bg="White", relief = RIDGE)
+        mainFrame = Frame(bd=2, bg="Light Yellow", relief = RIDGE)
         mainFrame.place(x=2, y=2, width=1086, height=640)                                                           
 
         # Account Management Label Frame
-        Student_Account_Management_lbl= Label(mainFrame, text="Student Account Management", font=("Segoe UI Variable", 25, "bold"), bg="White", fg="Red")
-        Student_Account_Management_lbl.place(x=293, y=5, width=500, height=55)
+        Student_Account_Management_lbl= Label(mainFrame, text="Student Account Management", font=("Segoe UI Variable", 35, "bold"), bg="Light Yellow", fg="Black")
+        Student_Account_Management_lbl.place(x=198, y=5, width=690, height=65)
 
 # ========================================================================================================================================================
         # Variables related to the students
@@ -44,75 +45,75 @@ class Student_Account_Management:
 #                                                                UI DESIGN
 # ========================================================================================================================================================
         # Student Information frame: This will contain all the information
-        Student_Information_Frame= LabelFrame(mainFrame, bd=2, bg="White", relief=RIDGE, text="Student Details", font=("Segoe UI Variable", 11, "bold"))
+        Student_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Student Details", font=("Segoe UI Variable", 11, "bold"))
         Student_Information_Frame.place(x=5, y=70, width=615, height=135)
 # ========================================================================================================================================================
         # Adding in the student related text boxes and labels
         # Adding a student id label and textbox
-        studentID_label = Label(Student_Information_Frame, text = "Student ID: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        studentID_label = Label(Student_Information_Frame, text = "Student ID: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         studentID_label.grid(row=0, column=0, padx=2, pady=5, sticky=W)
 
         studentID_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_student_ID, font=("Segoe UI Variable", 11, "bold"))
         studentID_textbox.grid(row=0, column=1, padx=3, pady=5, sticky=W)
 
         # Adding a Student Email label and textbox
-        student_email_label = Label(Student_Information_Frame, text = "Student Email: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        student_email_label = Label(Student_Information_Frame, text = "Student Email: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         student_email_label.grid(row=0, column=2, padx=4, pady=5, sticky=W)
         
         student_email_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_student_email, font=("Segoe UI Variable", 11, "bold"))
         student_email_textbox.grid(row=0, column=3, padx=3, pady=5, sticky=W)
 
         # Adding a first name label and textbox
-        first_name_label = Label(Student_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        first_name_label = Label(Student_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         first_name_label.grid(row=2, column=0, padx=2, pady=5, sticky=W)
 
         first_name_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_first_name, font=("Segoe UI Variable", 11, "bold"))
         first_name_textbox.grid(row=2, column=1, padx=3, pady=5, sticky=W)
 
         # Adding a last label and textbox
-        last_name_label = Label(Student_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        last_name_label = Label(Student_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         last_name_label.grid(row=2, column=2, padx=4, pady=5, sticky=W)
         
         last_name_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_last_name, font=("Segoe UI Variable", 11, "bold"))
         last_name_textbox.grid(row=2, column=3, padx=3, pady=5, sticky=W)
 
         # Adding a Student Year of Admission label and textbox
-        year_of_admission_label = Label(Student_Information_Frame, text = "Year of Admission: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        year_of_admission_label = Label(Student_Information_Frame, text = "Year of Admission: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         year_of_admission_label.grid(row=3, column=0, padx=2, pady=5, sticky=W)
         
         year_of_admission_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_year_of_admission, font=("Segoe UI Variable", 11, "bold"))
         year_of_admission_textbox.grid(row=3, column=1, padx=3, pady=5, sticky=W)
 
         # Adding a date of birth label and textbox
-        date_of_birth_label = Label(Student_Information_Frame, text = "Date of Birth: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        date_of_birth_label = Label(Student_Information_Frame, text = "Date of Birth: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         date_of_birth_label.grid(row=3, column=2, padx=4, pady=5, sticky=W)
 
         date_of_birth_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_date_of_birth, font=("Segoe UI Variable", 11, "bold"))
         date_of_birth_textbox.grid(row=3, column=3, padx=3, pady=5, sticky=W)
 # ========================================================================================================================================================
         # Parent Information Frame: This frame have the fields asking information for the student's parents
-        Parent_Information_Frame= LabelFrame(mainFrame, bd=2, bg="White", relief=RIDGE, text="Parent Details", font=("Segoe UI Variable", 11, "bold"))
+        Parent_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Parent Details", font=("Segoe UI Variable", 11, "bold"))
         Parent_Information_Frame.place(x=5, y=210, width=615, height=163)
 # ========================================================================================================================================================
         # Adding a subframe for fathers details
-        Father_Information_Frame= LabelFrame(Parent_Information_Frame, bd=2, bg="White", relief=RIDGE, text="Father's Details", font=("Segoe UI Variable", 11, "bold"))
+        Father_Information_Frame= LabelFrame(Parent_Information_Frame, bd=2, bg="Light Yellow", relief=RIDGE, text="Father's Details", font=("Segoe UI Variable", 11, "bold"))
         Father_Information_Frame.place(x=10, y=4, width=290, height=130)
 # ========================================================================================================================================================
         # Adding the information labels and text boxes
         # Adding father's first name label and text box
-        father_first_name_label = Label(Father_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        father_first_name_label = Label(Father_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         father_first_name_label.grid(row=0, column=0, padx=4, pady=5, sticky=W)
 
         father_first_name_textbox = ttk.Entry(Father_Information_Frame, width=21, textvariable=self.var_father_first_name, font=("Segoe UI Variable", 11, "bold"))
         father_first_name_textbox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
         # Adding father's last name label and text box
-        father_last_name_label = Label(Father_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        father_last_name_label = Label(Father_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         father_last_name_label.grid(row=1, column=0, padx=4, pady=5, sticky=W)
 
         father_last_name_textbox = ttk.Entry(Father_Information_Frame, width=21, textvariable=self.var_father_last_name, font=("Segoe UI Variable", 11, "bold"))
         father_last_name_textbox.grid(row=1, column=1, padx=5, pady=5, sticky=W)
         # Adding father's email label and text box
-        father_email_label = Label(Father_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        father_email_label = Label(Father_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         father_email_label.grid(row=2, column=0, padx=4, pady=5, sticky=W)
 
         father_email_textbox = ttk.Entry(Father_Information_Frame, width=21, textvariable=self.var_father_email, font=("Segoe UI Variable", 11, "bold"))
@@ -120,35 +121,35 @@ class Student_Account_Management:
 
 # ========================================================================================================================================================
         # Adding a subframe for mothers details
-        Mother_Information_Frame= LabelFrame(Parent_Information_Frame, bd=2, bg="White", relief=RIDGE, text="Mother's Details", font=("Segoe UI Variable", 11, "bold"))
+        Mother_Information_Frame= LabelFrame(Parent_Information_Frame, bd=2, bg="Light Yellow", relief=RIDGE, text="Mother's Details", font=("Segoe UI Variable", 11, "bold"))
         Mother_Information_Frame.place(x=310, y=4, width=290, height=130)
 # ========================================================================================================================================================
         # Adding the information labels and text boxes
         # Adding mother's first name label and text box
-        mother_first_name_label = Label(Mother_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        mother_first_name_label = Label(Mother_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         mother_first_name_label.grid(row=0, column=0, padx=4, pady=5, sticky=W)
 
         mother_first_name_textbox = ttk.Entry(Mother_Information_Frame, width=21, textvariable=self.var_mother_first_name, font=("Segoe UI Variable", 11, "bold"))
         mother_first_name_textbox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
         # Adding mother's last name label and text box
-        mother_last_name_label = Label(Mother_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        mother_last_name_label = Label(Mother_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         mother_last_name_label.grid(row=1, column=0, padx=4, pady=5, sticky=W)
 
         mother_last_name_textbox = ttk.Entry(Mother_Information_Frame, width=21, textvariable=self.var_mother_last_name, font=("Segoe UI Variable", 11, "bold"))
         mother_last_name_textbox.grid(row=1, column=1, padx=5, pady=5, sticky=W)
         # Adding mother's email label and text box
-        mother_email_label = Label(Mother_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 11, "bold"), bg = "White")
+        mother_email_label = Label(Mother_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         mother_email_label.grid(row=2, column=0, padx=4, pady=5, sticky=W)
 
         mother_email_textbox = ttk.Entry(Mother_Information_Frame, width=21, textvariable=self.var_mother_email, font=("Segoe UI Variable", 11, "bold"))
         mother_email_textbox.grid(row=2, column=1, padx=5, pady=5, sticky=W)
 # ========================================================================================================================================================
         # Adding a search frame which will have all the functions required to conduct a search
-        Search_Frame= LabelFrame(mainFrame, bd=2, bg="White", relief=RIDGE, text="Search System", font=("Segoe UI Variable", 11, "bold"))
+        Search_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Search System", font=("Segoe UI Variable", 11, "bold"))
         Search_Frame.place(x=5, y=380, width=860, height=250)
 
         # Adding a search bar
-        search_label = Label(Search_Frame, text="Search By:", font=("Segoe UI Variable", 12, "bold"), bg="White", fg="Black")
+        search_label = Label(Search_Frame, text="Search By:", font=("Segoe UI Variable", 12, "bold"), bg="Light Yellow", fg="Black")
         search_label.grid(row=0, column=0, padx=25, pady=5, sticky=W)
 
         # Adding a Search by combo box
@@ -162,15 +163,15 @@ class Student_Account_Management:
         search_entry_textbox.grid(row=0, column=2, padx=10, pady=5, sticky=W)
 
         # Adding a Search button
-        search_button = Button(Search_Frame, width=9, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
+        search_button = Button(Search_Frame, width=9, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
         search_button.grid(row=0, column=3,padx=10, pady=5, sticky=W)
         
         # Adding a Show All button
-        show_all_button = Button(Search_Frame, width=9, text="Show All", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
+        show_all_button = Button(Search_Frame, width=9, text="Show All", cursor="hand2", command=self.fetch_data, font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
         show_all_button.grid(row=0, column=4, padx=10, pady=5, sticky=W)
 #============================================================================================================================================================================================================
         # Table Frame
-        Table_Frame= Frame(Search_Frame, bd=2, bg="White", relief=RIDGE)
+        Table_Frame= Frame(Search_Frame, bd=2, bg="Light Yellow", relief=RIDGE)
         Table_Frame.place(x=5, y=45, width=845, height=180)
 
         # Scroll Bar
@@ -217,37 +218,41 @@ class Student_Account_Management:
         self.fetch_data()
 # ==========================================================================================================================================#
         # Adding a student face frame. This frame will show the video footage
-        Student_Face_Capture_Frame = Frame(mainFrame, bd=2, bg="White", relief = RIDGE)
+        Student_Face_Capture_Frame = Frame(mainFrame, bd=2, bg="Light Yellow", relief = RIDGE)
         Student_Face_Capture_Frame.place(x=630, y=79, width=446, height=295)
 # ==========================================================================================================================================#
         # Adding a camera footage frame which is labelled as student face frame. This will show the real time camera footage when a 
         # button is clicked
-        Student_Face_Frame = Frame(Student_Face_Capture_Frame, bd=2, bg="White", relief = RIDGE)
+        Student_Face_Frame = Frame(Student_Face_Capture_Frame, bd=2, bg="Light Yellow", relief = RIDGE)
         Student_Face_Frame.place(x=5, y=5, width=281, height=281)
 
         # Adding a student face label
-        student_face_label = Label(Student_Face_Capture_Frame, text="Student Face", font=("Segoe UI Variable", 12, "bold"), bg="White", fg="Black")
+        student_face_label = Label(Student_Face_Capture_Frame, text="Student Face", font=("Segoe UI Variable", 12, "bold"), bg="Light Yellow", fg="Black")
         student_face_label.place(x=300, y=5)
 
         # Adding a capture face button below the label
-        capture_face_button = Button(Student_Face_Capture_Frame, width=14, cursor="hand2", text="Capture Face", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
+        capture_face_button = Button(Student_Face_Capture_Frame, width=14, cursor="hand2",command=self.capture_face_button, text="Capture Face", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
         capture_face_button.place(x=290, y=30)
 # ==========================================================================================================================================#
         # Adding a button frame which will have the save, update and delete button
-        Button_Frame = Frame(mainFrame, bd=2, relief=RIDGE, bg="White")               
-        Button_Frame.place(x=873, y=385, width=203, height=247 )
+        Button_Frame = Frame(mainFrame, bd=2, relief=RIDGE, bg="Light Yellow")               
+        Button_Frame.place(x=873, y=385, width=203, height=245)
 
         # Add Student button
-        add_student_button = Button(Button_Frame, width=18, height=3, command=self.add_student_button, text="Add Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
-        add_student_button.grid(row=0, padx=5, pady=5)
+        add_student_button = Button(Button_Frame, width=18, height=2, command=self.add_student_button, text="Add Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        add_student_button.grid(row=0, padx=5, pady=4)
         
         # Update button
-        update_button = Button(Button_Frame, width=18, height=3, text="Update Student Details", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
-        update_button.grid(row=1, padx=5, pady=5)
+        update_button = Button(Button_Frame, width=18, height=2, command=self.update_student_button, text="Update Student Details", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        update_button.grid(row=1, padx=5, pady=4)
         
         # Delete button
-        delete_button = Button(Button_Frame, width=18, height=3, text="Delete Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
-        delete_button.grid(row=2, padx=5, pady=5)
+        delete_button = Button(Button_Frame, width=18, height=2, command= self.delete_student_button, text="Delete Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        delete_button.grid(row=2, padx=5, pady=4)
+
+        # Clear All Data button
+        clear_all_button = Button(Button_Frame, width=18, height=2, command= self.clear_all_button, text="Clear All Fields", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        clear_all_button.grid(row=3, padx=5, pady=4)
 #                                                            END OF UI DESIGN
 #===========================================================================================================================================#
 #############################################################################################################################################
@@ -279,6 +284,7 @@ class Student_Account_Management:
                 conn.commit()
                 self.fetch_data()
                 conn.close()
+                self.clear_all_button()
                 messagebox.showinfo("Success", "Student details have been added succesfully", parent=self.root)
             except Exception as es:
                 messagebox.showerror("Error", f"Due To : {str(es)}", parent=self.root)
@@ -304,9 +310,9 @@ class Student_Account_Management:
         data = content["values"]
 
         self.var_student_ID.set(data[0]),
-        self.var_student_email.set(data[1]),
-        self.var_first_name.set(data[2]),
-        self.var_last_name.set(data[3]),
+        self.var_first_name.set(data[1]),
+        self.var_last_name.set(data[2]),
+        self.var_student_email.set(data[3]),
         self.var_year_of_admission.set(data[4]),
         self.var_date_of_birth.set(data[5]),
         self.var_father_first_name.set(data[6]),
@@ -317,6 +323,161 @@ class Student_Account_Management:
         self.var_mother_email.set(data[11])
 # ------------------------------------------------------------------------------------------------------------------------------------------#
     # Update button implementation
+    def update_student_button(self):
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+            messagebox.showerror("Error", "All fields are required", parent=self.root)
+        else:
+            try:
+                update = messagebox.askyesno("Update Student Account", "Do you want to update student details?", parent=self.root)
+                if update > 0:
+                    conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                    my_cursor = conn.cursor()
+                    my_cursor.execute("UPDATE tbl_student SET First_Name=%s, Last_Name=%s, Email=%s, Year_Of_Admission=%s, Date_Of_Birth=%s, Father_First_Name=%s, Father_Last_Name=%s, Father_Email=%s, Mother_First_Name=%s, Mother_Last_Name=%s, Mother_Email=%s WHERE Student_ID=%s",(
+                                                                                                         self.var_first_name.get(),
+                                                                                                         self.var_last_name.get(),
+                                                                                                         self.var_student_email.get(),
+                                                                                                         self.var_year_of_admission.get(),
+                                                                                                         self.var_date_of_birth.get(),
+                                                                                                         self.var_father_first_name.get(),
+                                                                                                         self.var_father_last_name.get(),
+                                                                                                         self.var_father_email.get(),
+                                                                                                         self.var_mother_first_name.get(),
+                                                                                                         self.var_mother_last_name.get(),
+                                                                                                         self.var_mother_email.get(),
+                                                                                                         self.var_student_ID.get()
+                                                                                                        ))
+                else:
+                    if not update:
+                        return
+                messagebox.showinfo("Success", "Student details have been succesfully updated.", parent=self.root)
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                self.clear_all_button()
+            except Exception as es:
+                messagebox.showerror("Error", f"Due to: {str(es)}", paren=self.root)
+# ------------------------------------------------------------------------------------------------------------------------------------------#
+    # Delete Button Implementation
+    def delete_student_button(self):
+        if self.var_student_ID.get()=="":
+            messagebox.showerror("Error", "Student ID required.", parent=self.root)
+        else:
+            try:
+                delete = messagebox.askyesno("Delete Student Account", "Do you want to delete student account?", parent=self.root)
+                if delete > 0:
+                    conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                    my_cursor = conn.cursor()
+                    # my_cursor.execute("DELETE FROM tbl_student WHERE Student_ID=%s", (self.var_student_ID.get()))
+                    sql_query = "DELETE FROM tbl_student WHERE Student_ID=%s"
+                    values = (self.var_student_ID.get(),)
+                    my_cursor.execute(sql_query, values)
+                else:
+                    if not delete:
+                        return
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                self.clear_all_button()
+                messagebox.showinfo("Delete Student Account", "Student account has been succesfully deleted.", parent=self.root)
+            except Exception as es:
+                messagebox.showerror("Error", f"Due to: {str(es)}", parent=self.root)
+# ------------------------------------------------------------------------------------------------------------------------------------------#
+    # Clear All Fields button Implementation
+    def clear_all_button(self):
+        self.var_student_ID.set(""),
+        self.var_student_email.set(""),
+        self.var_first_name.set(""),
+        self.var_last_name.set(""),
+        self.var_year_of_admission.set(""),
+        self.var_date_of_birth.set(""),
+        self.var_father_first_name.set(""),
+        self.var_father_last_name.set(""),
+        self.var_father_email.set(""),
+        self.var_mother_first_name.set(""),
+        self.var_mother_last_name.set(""),
+        self.var_mother_email.set("")
+# -------------------------------------------------------------------------------------------------------------------------------------------#
+    def capture_face_button(self):
+        # Validation that all fields are filled up
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+            messagebox.showerror("Error", "All fields are required", parent=self.root)
+        else:
+            # Added a try box to get rid pf any exceptions which might arise
+            try:
+                conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                my_cursor = conn.cursor()
+                # Selected all the data from the database and stored it in the variable myresult
+                my_cursor.execute("SELECT * FROM tbl_student")
+                myresult = my_cursor.fetchall()
+                # We match the images to an id
+                id=0
+                # Therfore, we create a loop to manage the IDs
+                for x in myresult:
+                    id += 1
+                my_cursor.execute("UPDATE tbl_student SET First_Name=%s, Last_Name=%s, Email=%s, Year_Of_Admission=%s, Date_Of_Birth=%s, Father_First_Name=%s, Father_Last_Name=%s, Father_Email=%s, Mother_First_Name=%s, Mother_Last_Name=%s, Mother_Email=%s WHERE Student_ID=%s",(
+                                                                                                         self.var_first_name.get(),
+                                                                                                         self.var_last_name.get(),
+                                                                                                         self.var_student_email.get(),
+                                                                                                         self.var_year_of_admission.get(),
+                                                                                                         self.var_date_of_birth.get(),
+                                                                                                         self.var_father_first_name.get(),
+                                                                                                         self.var_father_last_name.get(),
+                                                                                                         self.var_father_email.get(),
+                                                                                                         self.var_mother_first_name.get(),
+                                                                                                         self.var_mother_last_name.get(),
+                                                                                                         self.var_mother_email.get(),
+                                                                                                         self.var_student_ID.get()==id+1
+                                                                                                        ))
+                conn.commit()
+                self.fetch_data()
+                self.clear_all_button()
+                conn.close()
+                # =========== Load predifined data on face frontals from Open CV. Loading Haarcascade frontal image default =========== #
+                # ideally, we need to give the path of the location of teh haarcascasde file. But in this case, the haarcascade has been 
+                # copied to the code folder and therefore we do not necessaily need to provide a path for it.
+                face_classifier = cv2.CascadeClassifier("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/haarcascade_frontalface_default.xml") 
+
+                def face_cropped(img):
+                    # Converting a Blue Green Red BGR image to grayscale form
+                    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                    faces =  face_classifier.detectMultiScale(gray, 1.3, 5)
+                    # Scalinng Factor = 1.3
+                    # Minimum Neighbour = 6
+
+                    for(x,y,w,h) in faces:
+                        face_cropped = img[y:y+h, x:x+w]
+                        return face_cropped
+
+                # The 0 here is an extension for the camera footage. If I want it to read a video file, I need to add in the video 
+                # location. By this line, we are accessing the camera footage
+                cap = cv2.VideoCapture(0)
+
+                img_id = 0
+                while True:
+                    ret, face_Frame = cap.read()
+                    if face_cropped(face_Frame) is not None:
+                        img_id += 1
+                        face = cv2.resize(face_cropped(face_Frame), (450, 450))
+                        face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+                        file_name_path = "C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Data/user." + str(id) + "." + str(img_id) + ".jpg"
+                        cv2.imwrite(file_name_path, face)
+                        cv2.putText(face, str(img_id), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 2, (0, 255, 0), 2)
+                        cv2.imshow("Capture Face", face)
+
+                    if cv2.waitKey(1)==13 or int(img_id==100):
+                        break
+                cap.release()
+                cv2.destroyWindow("Capture Face")
+                messagebox.showinfo("Capture Face", "Succesfully captured student face.")
+            except Exception as es:
+                messagebox.showerror("Error", f"Due to: {str(es)}", parent=self.root)
+
+
+
+
+
+
+
 
 
 
@@ -329,3 +490,5 @@ if __name__=="__main__":
     root = Tk()
     obj = Student_Account_Management(root)
     root.mainloop()
+
+

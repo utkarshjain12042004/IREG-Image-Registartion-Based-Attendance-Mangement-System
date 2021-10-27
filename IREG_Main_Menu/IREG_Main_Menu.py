@@ -1,8 +1,7 @@
 # Importing all the required modules to create the UI
 from tkinter import *
 from tkinter import ttk
-from PIL import Image
-from PIL import ImageTk
+import cv2
 from Account_Management import Account_Management
 
 
@@ -58,7 +57,7 @@ class Face_Recognition_System:
     def Account_Management(self):
         self.new_window = Toplevel(self.root)
         self.app = Account_Management(self.new_window)
-
+        cv2.destroyWindow("IREG")
 
 
                                   

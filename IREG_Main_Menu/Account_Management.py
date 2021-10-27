@@ -25,21 +25,21 @@ class Account_Management:
         Account_Management_Frame.place(x=25, y=100, width=344, height=134)
 #==========================================================================================================================================#
         # Adding in Manage Student Accounts Button
-        manage_student_accounts_button = Button(Account_Management_Frame, command=self.Manage_Teacher_Account_Button, text="Manage Student Accounts", cursor="hand2", font=("Segoe UI Variable", 18, "bold"), bg="Dark Blue", fg="White")
+        manage_student_accounts_button = Button(Account_Management_Frame, command=self.Manage_Student_Account_Button, text="Manage Student Accounts", cursor="hand2", font=("Segoe UI Variable", 18, "bold"), bg="Dark Blue", fg="White")
         manage_student_accounts_button.grid(row=0, padx=7, pady=7, sticky=W)
 #==========================================================================================================================================#
         # Adding in Manage Teacher Accounts Button
-        manage_teacher_accounts_button = Button(Account_Management_Frame, text="Manage Teacher Accounts", cursor="hand2", font=("Segoe UI Variable", 18, "bold"), bg="Dark Blue", fg="White")
-        manage_teacher_accounts_button.grid(row=1, padx=7, pady=7, sticky=W)
+        # manage_teacher_accounts_button = Button(Account_Management_Frame, text="Manage Teacher Accounts", cursor="hand2", font=("Segoe UI Variable", 18, "bold"), bg="Dark Blue", fg="White")
+        # manage_teacher_accounts_button.grid(row=1, padx=7, pady=7, sticky=W)
 #==========================================================================================================================================#
         # Adding a back button
         go_back_button = Button(mainFrame, text="Back", cursor="hand2", font=("Segoe UI Variable", 18, "bold"), bg="Dark Blue", fg="White")
         go_back_button.place(x=307, y=285)
 #==========================================================================================================================================#
     # This method calls the Start attendance page and allows it to be displayed on the screen
-    def back_Button(self):
+    def Manage_Student_Account_Button(self):
         self.new_window = Toplevel(self.root)
-        self.app = Face_Recognition_System(self.new_window)
+        self.app = Student_Account_Management(self.new_window)
 
 
 # This piece of code helps in calling class Face_Recognition_System
