@@ -1,11 +1,12 @@
-# importing all the required modules to create the UI
+# Importing all the required modules to create the UI
 from tkinter import *
 from tkinter import ttk
-from PIL import Image
-from PIL import ImageTk
 from tkinter import messagebox
-import mysql.connector
+from PIL import Image, ImageTk
+import os
+import numpy as np
 import cv2
+import mysql.connector
 
 
 class Student_Account_Management:
@@ -19,8 +20,8 @@ class Student_Account_Management:
         mainFrame.place(x=2, y=2, width=1086, height=640)                                                           
 
         # Account Management Label Frame
-        Student_Account_Management_lbl= Label(mainFrame, text="Student Account Management", font=("Segoe UI Variable", 35, "bold"), bg="Light Yellow", fg="Black")
-        Student_Account_Management_lbl.place(x=198, y=5, width=690, height=65)
+        Student_Account_Management_lbl= Label(mainFrame, text="Student Account Management", font=("Segoe UI Variable", 45, "bold"), bg="Light Yellow", fg="Black")
+        Student_Account_Management_lbl.place(x=108, y=5, width=870, height=75)
 
 # ========================================================================================================================================================
         # Variables related to the students
@@ -436,17 +437,47 @@ class Student_Account_Management:
                 # ideally, we need to give the path of the location of teh haarcascasde file. But in this case, the haarcascade has been 
                 # copied to the code folder and therefore we do not necessaily need to provide a path for it.
                 face_classifier = cv2.CascadeClassifier("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/haarcascade_frontalface_default.xml") 
-
+                # ----------------------------------------------------------------------------------------------------------------------- #
+                # Supplementary functions
+                # Cropping the video footage and focussing specifially on the face
                 def face_cropped(img):
                     # Converting a Blue Green Red BGR image to grayscale form
                     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                     faces =  face_classifier.detectMultiScale(gray, 1.3, 5)
                     # Scalinng Factor = 1.3
                     # Minimum Neighbour = 6
-
+                    
                     for(x,y,w,h) in faces:
                         face_cropped = img[y:y+h, x:x+w]
                         return face_cropped
+
+                def train_data_button(self):
+                    data_dir = ("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Data")
+                    path = [os.path.join(data_dir, file) for file in os.listdir(data_dir)]
+            
+                    faces = []
+                    ids = []
+            
+                    for face in path:
+                        img = Image.open(face).convert("L") # Grey Scale Image
+                        imageNP = np.array(img, 'uint8') # Converting gray scale image to an array of data type uint
+                        face_ID = int(os.path.split(face)[1].split(".")[1])
+            
+                        faces.append(imageNP)
+                        ids.append(face_ID)
+                        cv2.imshow("Training", imageNP)
+                        cv2.waitKey(1)==13
+                    ids = np.array(ids)
+            
+                    # Train Classifier and Save
+                    classifier = cv2.face.LBPHFaceRecognizer_create()
+                    classifier.train(faces, ids)
+                    classifier.write("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Trained_Faces.xml")
+                    cv2.destroyWindow("Training")
+                    messagebox.showinfo("Training Success", "Datasets have been trained successfully.")
+            # ---------------------------------------------------------------------------------------------------------------------------- #
+
+
 
                 # The 0 here is an extension for the camera footage. If I want it to read a video file, I need to add in the video 
                 # location. By this line, we are accessing the camera footage
@@ -469,22 +500,48 @@ class Student_Account_Management:
                 cap.release()
                 cv2.destroyWindow("Capture Face")
                 messagebox.showinfo("Capture Face", "Succesfully captured student face.")
+                self.train_data_button()
             except Exception as es:
                 messagebox.showerror("Error", f"Due to: {str(es)}", parent=self.root)
+    # ------------------------------------------------------------------------------------------------------------------------ #
+    # Cropping the video footage and focussing specifially on the face
+    def face_cropped(img):
+        # Converting a Blue Green Red BGR image to grayscale form
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        faces =  face_classifier.detectMultiScale(gray, 1.3, 5)
+        # Scalinng Factor = 1.3
+        # Minimum Neighbour = 6
+        
+        for(x,y,w,h) in faces:
+            face_cropped = img[y:y+h, x:x+w]
+            return face_cropped
+    # ------------------------------------------------------------------------------------------------------------------------ #
+    # Train the classifier using these face captures
+    def train_data_button(self):
+        data_dir = ("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Data")
+        path = [os.path.join(data_dir, file) for file in os.listdir(data_dir)]
 
+        faces = []
+        ids = []
 
+        for face in path:
+            img = Image.open(face).convert("L") # Grey Scale Image
+            imageNP = np.array(img, 'uint8') # Converting gray scale image to an array of data type uint
+            face_ID = int(os.path.split(face)[1].split(".")[1])
 
+            faces.append(imageNP)
+            ids.append(face_ID)
+            cv2.imshow("Training", imageNP)
+            cv2.waitKey(1)==13
+        ids = np.array(ids)
 
-
-
-
-
-
-
-
-
-
-
+        # Train Classifier and Save
+        classifier = cv2.face.LBPHFaceRecognizer_create()
+        classifier.train(faces, ids)
+        classifier.write("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Trained_Faces.xml")
+        cv2.destroyWindow("Training")
+        messagebox.showinfo("Training Success", "Datasets have been trained successfully.")
+# ---------------------------------------------------------------------------------------------------------------------------- #
 # This piece of code helps in calling class Face_Recognition_System
 if __name__=="__main__":
     root = Tk()
