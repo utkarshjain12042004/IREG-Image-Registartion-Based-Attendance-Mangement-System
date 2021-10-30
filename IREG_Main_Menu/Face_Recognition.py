@@ -29,28 +29,24 @@ class Face_Recognition:
         face_recognition_Button = Button(mainFrame, text="Face Recognition", cursor="hand2", command=self.face_recognition, font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="Light Yellow")
         face_recognition_Button.place(x=5,y=5, width=287, height=50)
 # ========================================================================================================================================= #
-    def mark_attendance(self, fetch_student_id, fetch_first_name, fetch_last_name):
-        with open("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Attendance.csv","r+", newline="/n") as f:
-            myDataList = f.readlines()
-            name_list = []
+    #def mark_attendance(self, fetch_student_id, fetch_first_name, fetch_last_name):
+    #    with open("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Attendance.csv","r+", newline="/n") as f:
+    #        myDataList = f.readlines()
+    #        name_list = []
 
-            for line in myDataList:
-                entry = line.split(",")
-                name_list.append(entry[0])
-            if ((fetch_student_id not in name_list) and (fetch_first_name not in name_list) and (fetch_last_name not in name_list)):
-                now = datetime.now()
-                attendance_time = now.strftime("%d/%m/%Y")
-                attendane_date = now.strftime("%H:%M:%S")
-                f.writelines(f"/n{fetch_student_id},{fetch_first_name},{fetch_last_name},{attendane_date},{attendance_time},Preset")
+    #        for line in myDataList:
+    #            entry = line.split(",")
+    #            name_list.append(entry[0])
+    #        if ((fetch_student_id not in name_list) and (fetch_first_name not in name_list) and (fetch_last_name not in name_list)):
+    #            now = datetime.now()
+    #            attendance_time = now.strftime("%d/%m/%Y")
+    #            attendane_date = now.strftime("%H:%M:%S")
+    #            f.writelines(f"/n{fetch_student_id},{fetch_first_name},{fetch_last_name},{attendane_date},{attendance_time},Preset")
 
 # ========================================================================================================================================= #
-    # Button Implementation 
+    # Button Implementation
     def face_recognition(self):
         # Corresponding Functions
-        def recognise(img, clf, faceCascade):
-            coord = draw_boundary(img, faceCascade, 1.1, 10, (255, 25, 255), "Face", clf)
-            return img
-
         def draw_boundary(img, classifier, scaleFactor, minNeighbour, color, text, clf):
             gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             features = classifier.detectMultiScale(gray_image, scaleFactor, minNeighbour)
@@ -84,13 +80,19 @@ class Face_Recognition:
                     cv2.putText(img, f"Student ID: {fetch_student_id}", (x, y-55), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
                     cv2.putText(img, f"First Name: {fetch_first_name}", (x, y-30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
                     cv2.putText(img, f"Last Name: {fetch_last_name}", (x, y-5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
-                    self.mark_attendance(fetch_student_id, fetch_first_name, fetch_last_name)
+                    #self.mark_attendance(fetch_student_id, fetch_first_name, fetch_last_name)
                 else:
                     cv2.rectangle(img, (x, y), (x+w, y+h), (0 , 0, 255), 3)
                     cv2.putText(img, "Unknown Face", (x, y-5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
 
                 coord = [x, y, w, h]
             return coord
+
+        def recognise(img, clf, faceCascade):
+            coord = draw_boundary(img, faceCascade, 1.1, 10, (255, 25, 255), "Face", clf)
+            return img
+
+        
 
         faceCascade = cv2.CascadeClassifier("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/haarcascade_frontalface_default.xml")
         clf = cv2.face.LBPHFaceRecognizer_create()

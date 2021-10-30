@@ -57,10 +57,10 @@
 #        # Adding a teacher Email label and textbox
 #        teacher_email_label = Label(Teacher_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 12, "bold"), bg = "White")
 #        teacher_email_label.grid(row=0, column=4, padx=3, pady=5, sticky=W)
-        
+       
 #        teacher_email_textbox = ttk.Entry(Teacher_Information_Frame, textvariable=self.var_teacher_email, font=("Segoe UI Variable", 11, "bold"))
 #        teacher_email_textbox.grid(row=0, column=5, padx=3, pady=5, sticky=W)
-        
+       
 #        # Adding a first name label and textbox
 #        first_name_label = Label(Teacher_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "White")
 #        first_name_label.grid(row=1, column=0, padx=3, pady=5, sticky=W)
@@ -71,7 +71,7 @@
 #        # Adding a last label and textbox
 #        last_name_label = Label(Teacher_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "White")
 #        last_name_label.grid(row=1, column=2, padx=3, pady=5, sticky=W)
-        
+       
 #        last_name_textbox = ttk.Entry(Teacher_Information_Frame, textvariable=self.var_last_name, font=("Segoe UI Variable", 11, "bold"))
 #        last_name_textbox.grid(row=1, column=3, padx=3, pady=5, sticky=W)
 
@@ -90,7 +90,7 @@
 #        # Adding a search bar
 #        search_label = Label(Search_Frame, text="Search By:", font=("Segoe UI Variable", 12, "bold"), bg="White", fg="Black")
 #        search_label.grid(row=0, column=0, padx=25, pady=5, sticky=W)
-        
+       
 #        # Adding a Search by combo box
 #        search_combobox=ttk.Combobox(Search_Frame, font=("Segoe UI Variable", 12, "bold"), width=17, state="readonly")
 #        search_combobox["values"] = ("Select", "Teacher ID", "Teacher Name", "Subject Taught")
@@ -104,7 +104,7 @@
 #        # Adding a Search button
 #        search_button = Button(Search_Frame, width=9, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
 #        search_button.grid(row=0, column=3,padx=10, pady=5, sticky=W)
-        
+       
 #        # Adding a Show All button
 #        show_all_button = Button(Search_Frame, width=9, text="Show All", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
 #        show_all_button.grid(row=0, column=4, padx=10, pady=5, sticky=W)
@@ -116,9 +116,9 @@
 #        # Scroll Bar
 #        scroll_x = ttk.Scrollbar(Table_Frame, orient=HORIZONTAL)
 #        scroll_y = ttk.Scrollbar(Table_Frame, orient=VERTICAL)
-        
+       
 #        self.teacher_table = ttk.Treeview(Table_Frame, column=("teacher_ID", "subject_taught", "first_name", "last_name", "email", "date_of_birth"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
-        
+       
 #        scroll_x.pack(side=BOTTOM, fill=X)
 #        scroll_y.pack(side=RIGHT, fill=Y)
 #        scroll_x.config(command=self.teacher_table.xview)
@@ -149,11 +149,11 @@
 #        # Add Teacher button
 #        add_teacher_button = Button(Button_Frame, width=18, height=4, text="Add Teacher", command=self.add_teacher_button, font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
 #        add_teacher_button.grid(row=0, padx=5, pady=5)
-        
+       
 #        # Update button
 #        update_button = Button(Button_Frame, width=18, height=4, text="Update Teacher Details", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
 #        update_button.grid(row=1, padx=5, pady=5)
-        
+       
 #        # Delete button
 #        delete_button = Button(Button_Frame, width=18, height=4, text="Delete Teacher", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
 #        delete_button.grid(row=2, padx=5, pady=5)

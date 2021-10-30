@@ -29,7 +29,13 @@ class Student_Account_Management:
         self.var_student_email = StringVar()
         self.var_first_name = StringVar()
         self.var_last_name = StringVar()
+        self.var_year_of_admission_day = StringVar()
+        self.var_year_of_admission_month = StringVar()
+        self.var_year_of_admission_year = StringVar()
         self.var_year_of_admission = StringVar()
+        self.var_date_of_birth_day = StringVar()
+        self.var_date_of_birth_month = StringVar()
+        self.var_date_of_birth_year = StringVar()
         self.var_date_of_birth = StringVar()
         
         # Variables related to the father
@@ -78,19 +84,58 @@ class Student_Account_Management:
         last_name_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_last_name, font=("Segoe UI Variable", 11, "bold"))
         last_name_textbox.grid(row=2, column=3, padx=3, pady=5, sticky=W)
 
-        # Adding a Student Year of Admission label and textbox
+        # Adding a Student Year of Admission label and textboxes for date / month and year
         year_of_admission_label = Label(Student_Information_Frame, text = "Year of Admission: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         year_of_admission_label.grid(row=3, column=0, padx=2, pady=5, sticky=W)
-        
-        year_of_admission_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_year_of_admission, font=("Segoe UI Variable", 11, "bold"))
-        year_of_admission_textbox.grid(row=3, column=1, padx=3, pady=5, sticky=W)
 
+        # - Adding a combo box for day
+        admission_day_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=3, state="readonly", textvariable=self.var_year_of_admission_day)
+        admission_day_combobox["values"] = ("dd", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31")
+        admission_day_combobox.current(0)
+        admission_day_combobox.place(x=149, y=72)
+
+        # - Adding a combo box for month
+        admission_month_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=3, state="readonly", textvariable=self.var_year_of_admission_month)
+        admission_month_combobox["values"] = ("mm", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
+        admission_month_combobox.current(0)
+        admission_month_combobox.place(x=202, y=72)
+
+        # - Adding a combo box for year
+        admission_year_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=4, state="readonly", textvariable=self.var_year_of_admission_year)
+        admission_year_combobox["values"] = ("yyyy", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021")
+        admission_year_combobox.current(0)
+        admission_year_combobox.place(x=254, y=72)
+
+        # - Concatenating all the varuables for dd,mm,yyyy
+        self.var_year_of_admission = self.var_year_of_admission_year.get() + "/" + self.var_year_of_admission_month.get() + "/" + self.var_year_of_admission_day.get()
+        
         # Adding a date of birth label and textbox
         date_of_birth_label = Label(Student_Information_Frame, text = "Date of Birth: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
         date_of_birth_label.grid(row=3, column=2, padx=4, pady=5, sticky=W)
 
-        date_of_birth_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_date_of_birth, font=("Segoe UI Variable", 11, "bold"))
-        date_of_birth_textbox.grid(row=3, column=3, padx=3, pady=5, sticky=W)
+        # - Adding a combo box for day
+        birth_day_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=3, state="readonly", textvariable=self.var_date_of_birth_day)
+        birth_day_combobox["values"] = ("dd", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31")
+        birth_day_combobox.current(0)
+        birth_day_combobox.place(x=441, y=72)
+
+        # - Adding a combo box for month
+        birth_month_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=3, state="readonly", textvariable=self.var_date_of_birth_month)
+        birth_month_combobox["values"] = ("mm", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
+        birth_month_combobox.current(0)
+        birth_month_combobox.place(x=494, y=72)
+
+        # - Adding a combo box for year
+        birth_year_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=4, state="readonly", textvariable=self.var_date_of_birth_year)
+        birth_year_combobox["values"] = ("yyyy", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021")
+        birth_year_combobox.current(0)
+        birth_year_combobox.place(x=546, y=72)
+
+        # - Concatenating all the varuables for dd,mm,yyyy
+        self.var_year_of_admission = self.var_date_of_birth_year.get() + "/" + self.var_date_of_birth_month.get() + "/" + self.var_date_of_birth_day.get()
+
+        # date_of_birth_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_date_of_birth, font=("Segoe UI Variable", 11, "bold"))
+        # date_of_birth_textbox.grid(row=3, column=3, padx=3, pady=5, sticky=W)
 # ========================================================================================================================================================
         # Parent Information Frame: This frame have the fields asking information for the student's parents
         Parent_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Parent Details", font=("Segoe UI Variable", 11, "bold"))
@@ -262,7 +307,7 @@ class Student_Account_Management:
 # ------------------------------------------------------------------------------------------------------------------------------------------#
     # Function for adding in the data when the user clicks on the add student button
     def add_student_button(self):
-        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission_day.get()=="" or self.var_year_of_admission_month.get()=="" or self.var_year_of_admission_year.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
             messagebox.showerror("Error", "All fields are required", parent=self.root)
         else:
             try:
@@ -309,13 +354,27 @@ class Student_Account_Management:
         cursor_focus = self.student_table.focus()
         content = self.student_table.item(cursor_focus)
         data = content["values"]
+        
+        # Splitting the date into day month and year so that when the user clicks on the record, it gives a value for those fields
+        year_of_admission = data[4]
+        splitting_year_of_admission = year_of_admission.split("-")
+
+        # Splitting the date into day month and year so that when the user clicks on the record, it gives a value for those fields
+        date_of_birth = data[5]
+        splitting_date_of_birth = date_of_birth.split("-")
+        
+        
 
         self.var_student_ID.set(data[0]),
         self.var_first_name.set(data[1]),
         self.var_last_name.set(data[2]),
         self.var_student_email.set(data[3]),
-        self.var_year_of_admission.set(data[4]),
-        self.var_date_of_birth.set(data[5]),
+        self.var_year_of_admission_day.set(splitting_year_of_admission[2]),
+        self.var_year_of_admission_month.set(splitting_year_of_admission[1]),
+        self.var_year_of_admission_year.set(splitting_year_of_admission[0]),
+        self.var_date_of_birth_day.set(splitting_date_of_birth[2]),
+        self.var_date_of_birth_month.set(splitting_date_of_birth[1]),
+        self.var_date_of_birth_year.set(splitting_date_of_birth[0]),
         self.var_father_first_name.set(data[6]),
         self.var_father_last_name.set(data[7]),
         self.var_father_email.set(data[8]),
