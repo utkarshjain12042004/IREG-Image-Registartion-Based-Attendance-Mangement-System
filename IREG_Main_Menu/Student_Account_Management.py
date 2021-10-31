@@ -132,7 +132,7 @@ class Student_Account_Management:
         birth_year_combobox.place(x=546, y=72)
 
         # - Concatenating all the varuables for dd,mm,yyyy
-        self.var_year_of_admission = self.var_date_of_birth_year.get() + "/" + self.var_date_of_birth_month.get() + "/" + self.var_date_of_birth_day.get()
+        self.var_date_of_birth = self.var_date_of_birth_year.get() + "/" + self.var_date_of_birth_month.get() + "/" + self.var_date_of_birth_day.get()
 
         # date_of_birth_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_date_of_birth, font=("Segoe UI Variable", 11, "bold"))
         # date_of_birth_textbox.grid(row=3, column=3, padx=3, pady=5, sticky=W)
@@ -307,7 +307,7 @@ class Student_Account_Management:
 # ------------------------------------------------------------------------------------------------------------------------------------------#
     # Function for adding in the data when the user clicks on the add student button
     def add_student_button(self):
-        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission_day.get()=="" or self.var_year_of_admission_month.get()=="" or self.var_year_of_admission_year.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission_day.get()=="" or self.var_year_of_admission_month.get()=="" or self.var_year_of_admission_year.get()=="" or self.var_date_of_birth_day.get()=="" or self.var_date_of_birth_month.get()=="" or self.var_date_of_birth_year.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
             messagebox.showerror("Error", "All fields are required", parent=self.root)
         else:
             try:
@@ -384,7 +384,7 @@ class Student_Account_Management:
 # ------------------------------------------------------------------------------------------------------------------------------------------#
     # Update button implementation
     def update_student_button(self):
-        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission_day.get()=="" or self.var_year_of_admission_month.get()=="" or self.var_year_of_admission_year.get()=="" or self.var_date_of_birth_day.get()=="" or self.var_date_of_birth_month.get()=="" or self.var_date_of_birth_year.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
             messagebox.showerror("Error", "All fields are required", parent=self.root)
         else:
             try:
@@ -415,7 +415,7 @@ class Student_Account_Management:
                 conn.close()
                 self.clear_all_button()
             except Exception as es:
-                messagebox.showerror("Error", f"Due to: {str(es)}", paren=self.root)
+                messagebox.showerror("Error", f"Due to: {str(es)}", parent=self.root)
 # ------------------------------------------------------------------------------------------------------------------------------------------#
     # Delete Button Implementation
     def delete_student_button(self):
@@ -448,8 +448,12 @@ class Student_Account_Management:
         self.var_student_email.set(""),
         self.var_first_name.set(""),
         self.var_last_name.set(""),
-        self.var_year_of_admission.set(""),
-        self.var_date_of_birth.set(""),
+        self.var_year_of_admission_day.set(""),
+        self.var_year_of_admission_month.set(""),
+        self.var_year_of_admission_year.set(""),
+        self.var_date_of_birth_day.set(""),
+        self.var_date_of_birth_month.set(""),
+        self.var_date_of_birth_year.set(""),
         self.var_father_first_name.set(""),
         self.var_father_last_name.set(""),
         self.var_father_email.set(""),
@@ -459,7 +463,7 @@ class Student_Account_Management:
 # -------------------------------------------------------------------------------------------------------------------------------------------#
     def capture_face_button(self):
         # Validation that all fields are filled up
-        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
             messagebox.showerror("Error", "All fields are required", parent=self.root)
         else:
             # Added a try box to get rid pf any exceptions which might arise

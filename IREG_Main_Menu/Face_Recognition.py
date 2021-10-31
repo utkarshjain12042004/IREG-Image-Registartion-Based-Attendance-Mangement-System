@@ -47,8 +47,13 @@ class Face_Recognition:
     # Button Implementation
     def face_recognition(self):
         # Corresponding Functions
-        def draw_boundary(img, classifier, scaleFactor, minNeighbour, color, text, clf):
-            gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        #def grayscaling_image(img):
+        #    pixel_array = asarray(img)
+
+        def draw_boundary(img, classifier, scaleFactor, minNeighbour, color, text, clf, gray_image):
+            #print("Executing draw boundary function")
+            ##gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            #print("Executing ")
             features = classifier.detectMultiScale(gray_image, scaleFactor, minNeighbour)
 
             coord = []
@@ -56,7 +61,7 @@ class Face_Recognition:
             for (x, y, w, h) in features:
                 cv2.rectangle(img, (x, y), (x+w, y+h), (0 ,255, 0), 3)
                 id,predict = clf.predict(gray_image[y:y+h, x:x+w])
-                confidence = int(100*(1-predict/300))
+                confidence = int(100*(1-predict/300))                                                                    ,
 
                 conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
                 my_cursor = conn.cursor()
@@ -66,20 +71,20 @@ class Face_Recognition:
                 fetch_student_id = str(my_cursor.fetchone())
                 fetch_student_id = "+".join(fetch_student_id)
 
-                my_cursor.execute("SELECT First_Name FROM tbl_Student WHERE Student_ID=" + str(id))
-                fetch_first_name = my_cursor.fetchone()
-                fetch_first_name = "+".join(fetch_first_name)
+                #my_cursor.execute("SELECT First_Name FROM tbl_Student WHERE Student_ID=" + str(id))
+                #fetch_first_name = my_cursor.fetchone()
+                #fetch_first_name = "+".join(fetch_first_name)
 
-                my_cursor.execute("SELECT Last_Name FROM tbl_Student WHERE Student_ID=" + str(id))
-                fetch_last_name = my_cursor.fetchone()
-                fetch_last_name = "+".join(fetch_last_name)
+                #my_cursor.execute("SELECT Last_Name FROM tbl_Student WHERE Student_ID=" + str(id))
+                #fetch_last_name = my_cursor.fetchone()
+                #fetch_last_name = "+".join(fetch_last_name)
 
                 # Confidence is the percentage of difference from the original image. Lower the confidence, the result is more 
                 # accurate and vice versa
                 if confidence > 50:
                     cv2.putText(img, f"Student ID: {fetch_student_id}", (x, y-55), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
-                    cv2.putText(img, f"First Name: {fetch_first_name}", (x, y-30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
-                    cv2.putText(img, f"Last Name: {fetch_last_name}", (x, y-5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
+                    #cv2.putText(img, f"First Name: {fetch_first_name}", (x, y-30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
+                    #cv2.putText(img, f"Last Name: {fetch_last_name}", (x, y-5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
                     #self.mark_attendance(fetch_student_id, fetch_first_name, fetch_last_name)
                 else:
                     cv2.rectangle(img, (x, y), (x+w, y+h), (0 , 0, 255), 3)
@@ -88,8 +93,8 @@ class Face_Recognition:
                 coord = [x, y, w, h]
             return coord
 
-        def recognise(img, clf, faceCascade):
-            coord = draw_boundary(img, faceCascade, 1.1, 10, (255, 25, 255), "Face", clf)
+        def recognise(img, clf, faceCascade, gray_image):
+            coord = draw_boundary(img, faceCascade, 1.1, 10, (255, 25, 255), "Face", clf, gray_image)
             return img
 
         
@@ -99,11 +104,15 @@ class Face_Recognition:
         clf.read("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Trained_Faces.xml")
 
         video_Capture = cv2.VideoCapture(0)
-
+        print("Exe")
         while True:
             ret,img = video_Capture.read()
-            img = recognise(img, clf, faceCascade)
+            print("Executed Line 107")
+            gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            img = recognise(img, clf, faceCascade, gray_image)
+            print("Executed Line 109")
             cv2.imshow("Welcome to IREG", img)
+            print("Executed Line 111")
 
             if cv2.waitKey(1)==13:
                 break
