@@ -21,7 +21,7 @@ class Student_Account_Management:
 
         # Account Management Label Frame
         Student_Account_Management_lbl= Label(mainFrame, text="Student Account Management", font=("Segoe UI Variable", 45, "bold"), bg="Light Yellow", fg="Black")
-        Student_Account_Management_lbl.place(x=108, y=5, width=870, height=75)
+        Student_Account_Management_lbl.place(x=108, y=2, width=870, height=75)
 
 # ========================================================================================================================================================
         # Variables related to the students
@@ -52,151 +52,151 @@ class Student_Account_Management:
 #                                                                UI DESIGN
 # ========================================================================================================================================================
         # Student Information frame: This will contain all the information
-        Student_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Student Details", font=("Segoe UI Variable", 11, "bold"))
-        Student_Information_Frame.place(x=5, y=70, width=615, height=135)
+        Student_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Student Details", font=("Segoe UI Variable", 12, "bold"))
+        Student_Information_Frame.place(x=5, y=75, width=793, height=135)
 # ========================================================================================================================================================
         # Adding in the student related text boxes and labels
         # Adding a student id label and textbox
-        studentID_label = Label(Student_Information_Frame, text = "Student ID: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        studentID_label.grid(row=0, column=0, padx=2, pady=5, sticky=W)
+        studentID_label = Label(Student_Information_Frame, text = "Student ID: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        studentID_label.grid(row=0, column=0, padx=5, pady=5, sticky=W)
 
-        studentID_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_student_ID, font=("Segoe UI Variable", 11, "bold"))
-        studentID_textbox.grid(row=0, column=1, padx=3, pady=5, sticky=W)
+        studentID_textbox = ttk.Entry(Student_Information_Frame, width=25, textvariable=self.var_student_ID, font=("Segoe UI Variable", 12, "bold"))
+        studentID_textbox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
 
         # Adding a Student Email label and textbox
-        student_email_label = Label(Student_Information_Frame, text = "Student Email: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        student_email_label.grid(row=0, column=2, padx=4, pady=5, sticky=W)
+        student_email_label = Label(Student_Information_Frame, text = "Student Email: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        student_email_label.grid(row=0, column=2, padx=5, pady=5, sticky=W)
         
-        student_email_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_student_email, font=("Segoe UI Variable", 11, "bold"))
-        student_email_textbox.grid(row=0, column=3, padx=3, pady=5, sticky=W)
+        student_email_textbox = ttk.Entry(Student_Information_Frame, width=25, textvariable=self.var_student_email, font=("Segoe UI Variable", 12, "bold"))
+        student_email_textbox.grid(row=0, column=3, padx=5, pady=5, sticky=W)
 
         # Adding a first name label and textbox
-        first_name_label = Label(Student_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        first_name_label.grid(row=2, column=0, padx=2, pady=5, sticky=W)
+        first_name_label = Label(Student_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        first_name_label.grid(row=2, column=0, padx=5, pady=5, sticky=W)
 
-        first_name_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_first_name, font=("Segoe UI Variable", 11, "bold"))
-        first_name_textbox.grid(row=2, column=1, padx=3, pady=5, sticky=W)
+        first_name_textbox = ttk.Entry(Student_Information_Frame, width=25, textvariable=self.var_first_name, font=("Segoe UI Variable", 12, "bold"))
+        first_name_textbox.grid(row=2, column=1, padx=5, pady=5, sticky=W)
 
         # Adding a last label and textbox
-        last_name_label = Label(Student_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        last_name_label.grid(row=2, column=2, padx=4, pady=5, sticky=W)
+        last_name_label = Label(Student_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        last_name_label.grid(row=2, column=2, padx=5, pady=5, sticky=W)
         
-        last_name_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_last_name, font=("Segoe UI Variable", 11, "bold"))
-        last_name_textbox.grid(row=2, column=3, padx=3, pady=5, sticky=W)
+        last_name_textbox = ttk.Entry(Student_Information_Frame, width=25, textvariable=self.var_last_name, font=("Segoe UI Variable", 12, "bold"))
+        last_name_textbox.grid(row=2, column=3, padx=5, pady=5, sticky=W)
 
         # Adding a Student Year of Admission label and textboxes for date / month and year
-        year_of_admission_label = Label(Student_Information_Frame, text = "Year of Admission: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        year_of_admission_label.grid(row=3, column=0, padx=2, pady=5, sticky=W)
+        year_of_admission_label = Label(Student_Information_Frame, text = "Year of Admission: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        year_of_admission_label.grid(row=3, column=0, padx=5, pady=5, sticky=W)
 
         # - Adding a combo box for day
         admission_day_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=3, state="readonly", textvariable=self.var_year_of_admission_day)
         admission_day_combobox["values"] = ("dd", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31")
         admission_day_combobox.current(0)
-        admission_day_combobox.place(x=149, y=72)
+        admission_day_combobox.place(x=169, y=72)
 
         # - Adding a combo box for month
         admission_month_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=3, state="readonly", textvariable=self.var_year_of_admission_month)
         admission_month_combobox["values"] = ("mm", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
         admission_month_combobox.current(0)
-        admission_month_combobox.place(x=202, y=72)
+        admission_month_combobox.place(x=234, y=72)
 
         # - Adding a combo box for year
         admission_year_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=4, state="readonly", textvariable=self.var_year_of_admission_year)
         admission_year_combobox["values"] = ("yyyy", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021")
         admission_year_combobox.current(0)
-        admission_year_combobox.place(x=254, y=72)
+        admission_year_combobox.place(x=299, y=72)
 
         # - Concatenating all the varuables for dd,mm,yyyy
         self.var_year_of_admission = self.var_year_of_admission_year.get() + "/" + self.var_year_of_admission_month.get() + "/" + self.var_year_of_admission_day.get()
         
         # Adding a date of birth label and textbox
-        date_of_birth_label = Label(Student_Information_Frame, text = "Date of Birth: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        date_of_birth_label.grid(row=3, column=2, padx=4, pady=5, sticky=W)
+        date_of_birth_label = Label(Student_Information_Frame, text = "Date of Birth: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        date_of_birth_label.grid(row=3, column=2, padx=5, pady=5, sticky=W)
 
         # - Adding a combo box for day
         birth_day_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=3, state="readonly", textvariable=self.var_date_of_birth_day)
         birth_day_combobox["values"] = ("dd", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31")
         birth_day_combobox.current(0)
-        birth_day_combobox.place(x=441, y=72)
+        birth_day_combobox.place(x=542, y=72)
 
         # - Adding a combo box for month
         birth_month_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=3, state="readonly", textvariable=self.var_date_of_birth_month)
         birth_month_combobox["values"] = ("mm", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
         birth_month_combobox.current(0)
-        birth_month_combobox.place(x=494, y=72)
+        birth_month_combobox.place(x=607, y=72)
 
         # - Adding a combo box for year
         birth_year_combobox=ttk.Combobox(Student_Information_Frame, font=("Segoe UI Variable", 12, "bold"), width=4, state="readonly", textvariable=self.var_date_of_birth_year)
         birth_year_combobox["values"] = ("yyyy", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021")
         birth_year_combobox.current(0)
-        birth_year_combobox.place(x=546, y=72)
+        birth_year_combobox.place(x=672, y=72)
 
         # - Concatenating all the varuables for dd,mm,yyyy
         self.var_date_of_birth = self.var_date_of_birth_year.get() + "/" + self.var_date_of_birth_month.get() + "/" + self.var_date_of_birth_day.get()
 
-        # date_of_birth_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_date_of_birth, font=("Segoe UI Variable", 11, "bold"))
+        # date_of_birth_textbox = ttk.Entry(Student_Information_Frame, textvariable=self.var_date_of_birth, font=("Segoe UI Variable", 12, "bold"))
         # date_of_birth_textbox.grid(row=3, column=3, padx=3, pady=5, sticky=W)
 # ========================================================================================================================================================
         # Parent Information Frame: This frame have the fields asking information for the student's parents
-        Parent_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Parent Details", font=("Segoe UI Variable", 11, "bold"))
-        Parent_Information_Frame.place(x=5, y=210, width=615, height=163)
+        Parent_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Parent Details", font=("Segoe UI Variable", 12, "bold"))
+        Parent_Information_Frame.place(x=5, y=210, width=793, height=163)
 # ========================================================================================================================================================
         # Adding a subframe for fathers details
-        Father_Information_Frame= LabelFrame(Parent_Information_Frame, bd=2, bg="Light Yellow", relief=RIDGE, text="Father's Details", font=("Segoe UI Variable", 11, "bold"))
-        Father_Information_Frame.place(x=10, y=4, width=290, height=130)
+        Father_Information_Frame= LabelFrame(Parent_Information_Frame, bd=2, bg="Light Yellow", relief=RIDGE, text="Father's Details", font=("Segoe UI Variable", 12, "bold"))
+        Father_Information_Frame.place(x=11, y=4, width=375, height=130)
 # ========================================================================================================================================================
         # Adding the information labels and text boxes
         # Adding father's first name label and text box
-        father_first_name_label = Label(Father_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        father_first_name_label.grid(row=0, column=0, padx=4, pady=5, sticky=W)
+        father_first_name_label = Label(Father_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        father_first_name_label.grid(row=0, column=0, padx=10, pady=5, sticky=W)
 
-        father_first_name_textbox = ttk.Entry(Father_Information_Frame, width=21, textvariable=self.var_father_first_name, font=("Segoe UI Variable", 11, "bold"))
-        father_first_name_textbox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
+        father_first_name_textbox = ttk.Entry(Father_Information_Frame, width=25, textvariable=self.var_father_first_name, font=("Segoe UI Variable", 12, "bold"))
+        father_first_name_textbox.grid(row=0, column=1, padx=10, pady=5, sticky=W)
         # Adding father's last name label and text box
-        father_last_name_label = Label(Father_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        father_last_name_label.grid(row=1, column=0, padx=4, pady=5, sticky=W)
+        father_last_name_label = Label(Father_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        father_last_name_label.grid(row=1, column=0, padx=10, pady=5, sticky=W)
 
-        father_last_name_textbox = ttk.Entry(Father_Information_Frame, width=21, textvariable=self.var_father_last_name, font=("Segoe UI Variable", 11, "bold"))
-        father_last_name_textbox.grid(row=1, column=1, padx=5, pady=5, sticky=W)
+        father_last_name_textbox = ttk.Entry(Father_Information_Frame, width=25, textvariable=self.var_father_last_name, font=("Segoe UI Variable", 12, "bold"))
+        father_last_name_textbox.grid(row=1, column=1, padx=10, pady=5, sticky=W)
         # Adding father's email label and text box
-        father_email_label = Label(Father_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        father_email_label.grid(row=2, column=0, padx=4, pady=5, sticky=W)
+        father_email_label = Label(Father_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        father_email_label.grid(row=2, column=0, padx=10, pady=5, sticky=W)
 
-        father_email_textbox = ttk.Entry(Father_Information_Frame, width=21, textvariable=self.var_father_email, font=("Segoe UI Variable", 11, "bold"))
-        father_email_textbox.grid(row=2, column=1, padx=5, pady=5, sticky=W)
+        father_email_textbox = ttk.Entry(Father_Information_Frame, width=25, textvariable=self.var_father_email, font=("Segoe UI Variable", 12, "bold"))
+        father_email_textbox.grid(row=2, column=1, padx=10, pady=5, sticky=W)
 
 # ========================================================================================================================================================
         # Adding a subframe for mothers details
-        Mother_Information_Frame= LabelFrame(Parent_Information_Frame, bd=2, bg="Light Yellow", relief=RIDGE, text="Mother's Details", font=("Segoe UI Variable", 11, "bold"))
-        Mother_Information_Frame.place(x=310, y=4, width=290, height=130)
+        Mother_Information_Frame= LabelFrame(Parent_Information_Frame, bd=2, bg="Light Yellow", relief=RIDGE, text="Mother's Details", font=("Segoe UI Variable", 12, "bold"))
+        Mother_Information_Frame.place(x=406, y=4, width=375, height=130)
 # ========================================================================================================================================================
         # Adding the information labels and text boxes
         # Adding mother's first name label and text box
-        mother_first_name_label = Label(Mother_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        mother_first_name_label.grid(row=0, column=0, padx=4, pady=5, sticky=W)
+        mother_first_name_label = Label(Mother_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        mother_first_name_label.grid(row=0, column=0, padx=10, pady=5, sticky=W)
 
-        mother_first_name_textbox = ttk.Entry(Mother_Information_Frame, width=21, textvariable=self.var_mother_first_name, font=("Segoe UI Variable", 11, "bold"))
-        mother_first_name_textbox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
+        mother_first_name_textbox = ttk.Entry(Mother_Information_Frame, width=25, textvariable=self.var_mother_first_name, font=("Segoe UI Variable", 12, "bold"))
+        mother_first_name_textbox.grid(row=0, column=1, padx=10, pady=5, sticky=W)
         # Adding mother's last name label and text box
-        mother_last_name_label = Label(Mother_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        mother_last_name_label.grid(row=1, column=0, padx=4, pady=5, sticky=W)
+        mother_last_name_label = Label(Mother_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        mother_last_name_label.grid(row=1, column=0, padx=10, pady=5, sticky=W)
 
-        mother_last_name_textbox = ttk.Entry(Mother_Information_Frame, width=21, textvariable=self.var_mother_last_name, font=("Segoe UI Variable", 11, "bold"))
-        mother_last_name_textbox.grid(row=1, column=1, padx=5, pady=5, sticky=W)
+        mother_last_name_textbox = ttk.Entry(Mother_Information_Frame, width=25, textvariable=self.var_mother_last_name, font=("Segoe UI Variable", 12, "bold"))
+        mother_last_name_textbox.grid(row=1, column=1, padx=10, pady=5, sticky=W)
         # Adding mother's email label and text box
-        mother_email_label = Label(Mother_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 11, "bold"), bg = "Light Yellow")
-        mother_email_label.grid(row=2, column=0, padx=4, pady=5, sticky=W)
+        mother_email_label = Label(Mother_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        mother_email_label.grid(row=2, column=0, padx=10, pady=5, sticky=W)
 
-        mother_email_textbox = ttk.Entry(Mother_Information_Frame, width=21, textvariable=self.var_mother_email, font=("Segoe UI Variable", 11, "bold"))
-        mother_email_textbox.grid(row=2, column=1, padx=5, pady=5, sticky=W)
+        mother_email_textbox = ttk.Entry(Mother_Information_Frame, width=25, textvariable=self.var_mother_email, font=("Segoe UI Variable", 12, "bold"))
+        mother_email_textbox.grid(row=2, column=1, padx=10, pady=5, sticky=W)
 # ========================================================================================================================================================
         # Adding a search frame which will have all the functions required to conduct a search
-        Search_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Search System", font=("Segoe UI Variable", 11, "bold"))
-        Search_Frame.place(x=5, y=380, width=860, height=250)
+        Search_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Search System", font=("Segoe UI Variable", 12, "bold"))
+        Search_Frame.place(x=5, y=380, width=1071, height=250)
 
         # Adding a search bar
         search_label = Label(Search_Frame, text="Search By:", font=("Segoe UI Variable", 12, "bold"), bg="Light Yellow", fg="Black")
-        search_label.grid(row=0, column=0, padx=25, pady=5, sticky=W)
+        search_label.grid(row=0, column=0, padx=5, pady=5, sticky=W)
 
         # Adding a Search by combo box
         search_combobox=ttk.Combobox(Search_Frame, font=("Segoe UI Variable", 12, "bold"), width=17, state="readonly")
@@ -209,16 +209,16 @@ class Student_Account_Management:
         search_entry_textbox.grid(row=0, column=2, padx=10, pady=5, sticky=W)
 
         # Adding a Search button
-        search_button = Button(Search_Frame, width=9, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        search_button = Button(Search_Frame, width=22, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
         search_button.grid(row=0, column=3,padx=10, pady=5, sticky=W)
         
         # Adding a Show All button
-        show_all_button = Button(Search_Frame, width=9, text="Show All", cursor="hand2", command=self.fetch_data, font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        show_all_button = Button(Search_Frame, width=22, text="Show All", cursor="hand2", command=self.fetch_data, font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
         show_all_button.grid(row=0, column=4, padx=10, pady=5, sticky=W)
 #============================================================================================================================================================================================================
         # Table Frame
         Table_Frame= Frame(Search_Frame, bd=2, bg="Light Yellow", relief=RIDGE)
-        Table_Frame.place(x=5, y=45, width=845, height=180)
+        Table_Frame.place(x=5, y=45, width=1056, height=180)
 
         # Scroll Bar
         scroll_x = ttk.Scrollbar(Table_Frame, orient=HORIZONTAL)
@@ -264,41 +264,45 @@ class Student_Account_Management:
         self.fetch_data()
 # ==========================================================================================================================================#
         # Adding a student face frame. This frame will show the video footage
-        Student_Face_Capture_Frame = Frame(mainFrame, bd=2, bg="Light Yellow", relief = RIDGE)
-        Student_Face_Capture_Frame.place(x=630, y=79, width=446, height=295)
+        # Student_Face_Capture_Frame = Frame(mainFrame, bd=2, bg="Light Yellow", relief = RIDGE)
+        # Student_Face_Capture_Frame.place(x=630, y=79, width=446, height=295)
 # ==========================================================================================================================================#
         # Adding a camera footage frame which is labelled as student face frame. This will show the real time camera footage when a 
         # button is clicked
-        Student_Face_Frame = Frame(Student_Face_Capture_Frame, bd=2, bg="Light Yellow", relief = RIDGE)
-        Student_Face_Frame.place(x=5, y=5, width=281, height=281)
+        # Student_Face_Frame = Frame(Student_Face_Capture_Frame, bd=2, bg="Light Yellow", relief = RIDGE)
+        # Student_Face_Frame.place(x=5, y=5, width=281, height=281)
 
         # Adding a student face label
-        student_face_label = Label(Student_Face_Capture_Frame, text="Student Face", font=("Segoe UI Variable", 12, "bold"), bg="Light Yellow", fg="Black")
-        student_face_label.place(x=300, y=5)
+        #student_face_label = Label(Student_Face_Capture_Frame, text="Student Face", font=("Segoe UI Variable", 12, "bold"), bg="Light Yellow", fg="Black")
+        #student_face_label.place(x=300, y=5)
 
-        # Adding a capture face button below the label
-        capture_face_button = Button(Student_Face_Capture_Frame, width=14, cursor="hand2",command=self.capture_face_button, text="Capture Face", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
-        capture_face_button.place(x=290, y=30)
+       ## Adding a capture face button below the label
+        #capture_face_button = Button(Student_Face_Capture_Frame, width=14, cursor="hand2",command=self.capture_face_button, text="Capture Face", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        #capture_face_button.place(x=290, y=30)
 # ==========================================================================================================================================#
         # Adding a button frame which will have the save, update and delete button
         Button_Frame = Frame(mainFrame, bd=2, relief=RIDGE, bg="Light Yellow")               
-        Button_Frame.place(x=873, y=385, width=203, height=245)
+        Button_Frame.place(x=803, y=79, width=273, height=303)
+
+        # Adding a capture face button below the label
+        capture_face_button = Button(Button_Frame, width=25, height=2, cursor="hand2",command=self.capture_face_button, text="Capture Face", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        capture_face_button.grid(row=0, padx=5, pady=4)
 
         # Add Student button
-        add_student_button = Button(Button_Frame, width=18, height=2, command=self.add_student_button, text="Add Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
-        add_student_button.grid(row=0, padx=5, pady=4)
+        add_student_button = Button(Button_Frame, width=25, height=2, command=self.add_student_button, text="Add Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        add_student_button.grid(row=1, padx=5, pady=4)
         
         # Update button
-        update_button = Button(Button_Frame, width=18, height=2, command=self.update_student_button, text="Update Student Details", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
-        update_button.grid(row=1, padx=5, pady=4)
+        update_button = Button(Button_Frame, width=25, height=2, command=self.update_student_button, text="Update Student Details", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        update_button.grid(row=2, padx=5, pady=4)
         
         # Delete button
-        delete_button = Button(Button_Frame, width=18, height=2, command= self.delete_student_button, text="Delete Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
-        delete_button.grid(row=2, padx=5, pady=4)
+        delete_button = Button(Button_Frame, width=25, height=2, command= self.delete_student_button, text="Delete Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        delete_button.grid(row=3, padx=5, pady=4)
 
         # Clear All Data button
-        clear_all_button = Button(Button_Frame, width=18, height=2, command= self.clear_all_button, text="Clear All Fields", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
-        clear_all_button.grid(row=3, padx=5, pady=4)
+        clear_all_button = Button(Button_Frame, width=25, height=2, command= self.clear_all_button, text="Clear All Fields", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        clear_all_button.grid(row=5, padx=5, pady=4)
 #                                                            END OF UI DESIGN
 #===========================================================================================================================================#
 #############################################################################################################################################
@@ -307,7 +311,7 @@ class Student_Account_Management:
 # ------------------------------------------------------------------------------------------------------------------------------------------#
     # Function for adding in the data when the user clicks on the add student button
     def add_student_button(self):
-        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission_day.get()=="" or self.var_year_of_admission_month.get()=="" or self.var_year_of_admission_year.get()=="" or self.var_date_of_birth_day.get()=="" or self.var_date_of_birth_month.get()=="" or self.var_date_of_birth_year.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission_day.get()=="" or self.var_year_of_admission_month.get()=="" or self.var_year_of_admission_year.get()=="" or self.var_date_of_birth_day.get()=="" or self.var_date_of_birth_month.get()=="" or self.var_date_of_birth_year.get()==""  or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
             messagebox.showerror("Error", "All fields are required", parent=self.root)
         else:
             try:
@@ -363,8 +367,6 @@ class Student_Account_Management:
         date_of_birth = data[5]
         splitting_date_of_birth = date_of_birth.split("-")
         
-        
-
         self.var_student_ID.set(data[0]),
         self.var_first_name.set(data[1]),
         self.var_last_name.set(data[2]),
