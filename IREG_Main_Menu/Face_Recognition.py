@@ -9,6 +9,7 @@ import cv2
 import mysql.connector
 from time import strftime
 from datetime import datetime
+import numpy
 
 # Creating a class for the UI
 class Face_Recognition:
@@ -51,7 +52,9 @@ class Face_Recognition:
         #    pixel_array = asarray(img)
 
         def draw_boundary(img, classifier, scaleFactor, minNeighbour, color, text, clf,):
+            cv2.imshow("XYZ", img)
             gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            cv2.imhshow("XYZ",img)
             features = classifier.detectMultiScale(gray_image, scaleFactor, minNeighbour)
 
             coord = []
@@ -109,6 +112,7 @@ class Face_Recognition:
 
             if cv2.waitKey(1)==13:
                 break
+            
             video_Capture.release()
             cv2.destroyAllWindows()
 # ========================================================================================================================================= #
