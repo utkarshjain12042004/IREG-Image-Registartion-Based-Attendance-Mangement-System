@@ -35,6 +35,7 @@ class Student_Account_Management:
         self.var_father_first_name = StringVar()
         self.var_father_last_name = StringVar()
         self.var_father_email = StringVar()
+
         # Variables related to the mother
         self.var_mother_first_name = StringVar()
         self.var_mother_last_name = StringVar()
@@ -278,6 +279,7 @@ class Student_Account_Management:
                 messagebox.showinfo("Success", "Student details have been added succesfully", parent=self.root)
             except Exception as es:
                 messagebox.showerror("Error", f"Due To : {str(es)}", parent=self.root)
+
     # Funtion to fetch the date in the table frame created
     def fetch_data(self):
         conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
@@ -493,6 +495,7 @@ class Student_Account_Management:
         cv2.destroyWindow("Training")
         messagebox.showinfo("Training Success", "Datasets have been trained successfully.")
 # ---------------------------------------------------------------------------------------------------------------------------- #
+
 # This piece of code helps in calling class Face_Recognition_System
 if __name__=="__main__":
     root = Tk()

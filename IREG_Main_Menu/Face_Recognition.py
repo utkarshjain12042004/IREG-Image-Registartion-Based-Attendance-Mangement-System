@@ -52,9 +52,7 @@ class Face_Recognition:
         #    pixel_array = asarray(img)
 
         def draw_boundary(img, classifier, scaleFactor, minNeighbour, color, text, clf,):
-            cv2.imshow("XYZ", img)
             gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            cv2.imhshow("XYZ",img)
             features = classifier.detectMultiScale(gray_image, scaleFactor, minNeighbour)
 
             coord = []
@@ -106,15 +104,15 @@ class Face_Recognition:
         video_Capture = cv2.VideoCapture(0)
 
         while True:
-            img = video_Capture.read()
+            ret, img = video_Capture.read()
             img = recognise(img, clf, faceCascade)
             cv2.imshow("Welcome to IREG", img)
 
             if cv2.waitKey(1)==13:
                 break
             
-            video_Capture.release()
-            cv2.destroyAllWindows()
+        video_Capture.release()
+        cv2.destroyAllWindows()
 # ========================================================================================================================================= #
 
 # This piece of code helps in calling class Face_Recognition_System
