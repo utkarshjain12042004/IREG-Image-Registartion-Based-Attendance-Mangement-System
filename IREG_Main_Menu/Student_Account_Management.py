@@ -13,14 +13,15 @@ class Student_Account_Management:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1090x645+0+0")
-        self.root.title("Student_Account Management")
+        self.root.title("IREG: Student Account Management")
+
         # Main Frame: This will contain all the buttons
         mainFrame = Frame(bd=2, bg="Light Yellow", relief = RIDGE)
         mainFrame.place(x=2, y=2, width=1086, height=640)                                                           
 
         # Account Management Label Frame
         Student_Account_Management_lbl= Label(mainFrame, text="Student Account Management", font=("Segoe UI Variable", 45, "bold"), bg="Light Yellow", fg="Black")
-        Student_Account_Management_lbl.place(x=108, y=5, width=870, height=75)
+        Student_Account_Management_lbl.place(x=108, y=0, width=870, height=75)
 
 # ========================================================================================================================================================
         # Variables related to the students
@@ -46,7 +47,7 @@ class Student_Account_Management:
 # ========================================================================================================================================================
         # Student Information frame: This will contain all the information
         Student_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Student Details", font=("Segoe UI Variable", 12, "bold"),)
-        Student_Information_Frame.place(x=5, y=70, width=793, height=135)
+        Student_Information_Frame.place(x=5, y=72, width=793, height=135)
 # ========================================================================================================================================================
         # Adding in the student related text boxes and labels
         # Adding a student id label and textbox
@@ -94,7 +95,7 @@ class Student_Account_Management:
 # ========================================================================================================================================================
         # Parent Information Frame: This frame have the fields asking information for the student's parents
         Parent_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Parent Details", font=("Segoe UI Variable", 12, "bold"),)
-        Parent_Information_Frame.place(x=5, y=210, width=793, height=163)
+        Parent_Information_Frame.place(x=5, y=212, width=793, height=163)
 # ========================================================================================================================================================
         # Adding a subframe for fathers details
         Father_Information_Frame= LabelFrame(Parent_Information_Frame, bd=2, bg="Light Yellow", relief=RIDGE, text="Father's Details", font=("Segoe UI Variable", 12, "bold"),)
@@ -129,24 +130,24 @@ class Student_Account_Management:
         # Adding the information labels and text boxes
         # Adding mother's first name label and text box
         mother_first_name_label = Label(Mother_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
-        mother_first_name_label.grid(row=0, column=0, padx=10, pady=5, sticky=W)
+        mother_first_name_label.grid(row=0, column=0, padx=4, pady=5, sticky=W)
 
-        mother_first_name_textbox = ttk.Entry(Mother_Information_Frame, width=25, textvariable=self.var_mother_first_name, font=("Segoe UI Variable", 12, "bold"),)
-        mother_first_name_textbox.grid(row=0, column=1, padx=7, pady=5, sticky=W)
+        mother_first_name_textbox = ttk.Entry(Mother_Information_Frame, width=25, textvariable=self.var_father_first_name, font=("Segoe UI Variable", 12, "bold"),)
+        mother_first_name_textbox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
 
         # Adding mother's last name label and text box
         mother_last_name_label = Label(Mother_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
-        mother_last_name_label.grid(row=1, column=0, padx=10, pady=5, sticky=W)
+        mother_last_name_label.grid(row=1, column=0, padx=4, pady=5, sticky=W)
 
         mother_last_name_textbox = ttk.Entry(Mother_Information_Frame, width=25, textvariable=self.var_mother_last_name, font=("Segoe UI Variable", 12, "bold"),)
-        mother_last_name_textbox.grid(row=1, column=1, padx=7, pady=5, sticky=W)
+        mother_last_name_textbox.grid(row=1, column=1, padx=5, pady=5, sticky=W)
 
         # Adding mother's email label and text box
         mother_email_label = Label(Mother_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
-        mother_email_label.grid(row=2, column=0, padx=10, pady=5, sticky=W)
+        mother_email_label.grid(row=2, column=0, padx=4, pady=5, sticky=W)
 
         mother_email_textbox = ttk.Entry(Mother_Information_Frame, width=25, textvariable=self.var_mother_email, font=("Segoe UI Variable", 12, "bold"),)
-        mother_email_textbox.grid(row=2, column=1, padx=7, pady=5, sticky=W)
+        mother_email_textbox.grid(row=2, column=1, padx=5, pady=5, sticky=W)
 # ========================================================================================================================================================
         # Adding a search frame which will have all the functions required to conduct a search
         Search_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Search System", font=("Segoe UI Variable", 12, "bold"),)
@@ -222,24 +223,24 @@ class Student_Account_Management:
         self.fetch_data()
 # ==========================================================================================================================================#
         # Adding a button frame which will have the save, update and delete button
-        Button_Frame = Frame(mainFrame, bd=2, relief=RIDGE, bg="Light Yellow")               
-        Button_Frame.place(x=803, y=79, width=273, height=299)
-
-        # Adding a capture face button below the label
-        capture_face_button = Button(Button_Frame, width=25, height=2, cursor="hand2",command=self.capture_face_button, text="Capture Face", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
-        capture_face_button.grid(row=0, padx=5, pady=4)
+        Button_Frame = Frame(mainFrame, bd=2, relief=RIDGE, bg="Light Yellow")
+        Button_Frame.place(x=803, y=79, width=273, height=304)
 
         # Add Student button
         add_student_button = Button(Button_Frame, width=25, height=2, command=self.add_student_button, text="Add Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
-        add_student_button.grid(row=1, padx=5, pady=4)
+        add_student_button.grid(row=0, padx=5, pady=4)
         
         # Update button
         update_button = Button(Button_Frame, width=25, height=2, command=self.update_student_button, text="Update Student Details", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
-        update_button.grid(row=2, padx=5, pady=4)
+        update_button.grid(row=1, padx=5, pady=4)
         
         # Delete button
         delete_button = Button(Button_Frame, width=25, height=2, command= self.delete_student_button, text="Delete Student", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
-        delete_button.grid(row=3, padx=5, pady=4)
+        delete_button.grid(row=2, padx=5, pady=4)
+
+        # Adding a capture face button below the label
+        capture_face_button = Button(Button_Frame, width=25, height=2, cursor="hand2",command=self.capture_face_button, text="Capture Face", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        capture_face_button.grid(row=3, padx=5, pady=4)
 
         # Clear All Data button
         clear_all_button = Button(Button_Frame, width=25, height=2, command= self.clear_all_button, text="Clear All Fields", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")

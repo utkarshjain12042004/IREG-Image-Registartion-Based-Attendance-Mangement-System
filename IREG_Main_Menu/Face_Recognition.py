@@ -67,27 +67,27 @@ class Face_Recognition:
 
 
                 my_cursor.execute("SELECT Student_ID FROM tbl_Student WHERE Student_ID=" + str(id))
-                fetch_student_id = str(my_cursor.fetchone())
-                fetch_student_id = "+".join(fetch_student_id)
+                fetch_student_id = my_cursor.fetchone()
+                fetch_student_id = "+".join(str(fetch_student_id))
 
                 my_cursor.execute("SELECT First_Name FROM tbl_Student WHERE Student_ID=" + str(id))
-                fetch_first_name = str(my_cursor.fetchone())
+                fetch_first_name = my_cursor.fetchone()
                 fetch_first_name = "+".join(fetch_first_name)
 
                 my_cursor.execute("SELECT Last_Name FROM tbl_Student WHERE Student_ID=" + str(id))
-                fetch_last_name = str(my_cursor.fetchone()) 
+                fetch_last_name = my_cursor.fetchone()
                 fetch_last_name = "+".join(fetch_last_name)
 
                 # Confidence is the percentage of difference from the original image. Lower the confidence, the result is more 
                 # accurate and vice versa
-                if confidence > 50:
-                    cv2.putText(img, f"Student ID: {fetch_student_id}", (x, y-55), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
-                    cv2.putText(img, f"First Name: {fetch_first_name}", (x, y-30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
-                    cv2.putText(img, f"Last Name: {fetch_last_name}", (x, y-5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
+                if confidence > 77:
+                    cv2.putText(img, f"Student ID: {fetch_student_id}", (x, y-60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 3)
+                    cv2.putText(img, f"First Name: {fetch_first_name}", (x, y-35), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 3)
+                    cv2.putText(img, f"Last Name: {fetch_last_name}", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 3)
                     #self.mark_attendance(fetch_student_id, fetch_first_name, fetch_last_name)
                 else:
                     cv2.rectangle(img, (x, y), (x+w, y+h), (0 , 0, 255), 3)
-                    cv2.putText(img, "Unknown Face", (x, y-5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
+                    cv2.putText(img, "Unknown Face", (x, y-5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (000, 000, 255), 3)
 
                 coord = [x, y, w, h]
 
