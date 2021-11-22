@@ -6,7 +6,8 @@ from tkinter import ttk
 class Account_Management:
     def __init__(self, root):
         self.root = root
-        self.root.geometry("1090x645+0+0")
+        self.root.geometry("1090x645+75+70")
+        self.root.resizable(width=False, height=False)
         self.root.title("Account Management")
 
         # Main Frame: This will contain all the buttons

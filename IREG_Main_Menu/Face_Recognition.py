@@ -16,7 +16,8 @@ class Face_Recognition:
     # This is the constructor of the class Face_Recognition_System
     def __init__(self, root):
         self.root = root
-        self.root.geometry("1090x645+0+0")
+        self.root.geometry("1090x645+75+70")
+        self.root.resizable(width=False, height=False)
         self.root.title("Face Recognition")
         
         # Main Frame: This will contain all the buttons

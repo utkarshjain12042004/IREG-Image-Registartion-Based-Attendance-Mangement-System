@@ -8,16 +8,17 @@ import numpy as np
 import cv2
 import mysql.connector
 
-
 class Student_Account_Management:
     def __init__(self, root):
         self.root = root
-        self.root.geometry("1090x645+0+0")
+        # Setting the window height and width along with where the window should open on the screen.
+        self.root.geometry("1090x645+75+70")
+        self.root.resizable(width=False, height=False)
         self.root.title("IREG: Student Account Management")
 
         # Main Frame: This will contain all the buttons
         mainFrame = Frame(bd=2, bg="Light Yellow", relief = RIDGE)
-        mainFrame.place(x=2, y=2, width=1086, height=640)                                                           
+        mainFrame.place(x=2, y=2, width=1086, height=640)
 
         # Account Management Label Frame
         Student_Account_Management_lbl= Label(mainFrame, text="Student Account Management", font=("Segoe UI Variable", 45, "bold"), bg="Light Yellow", fg="Black")
@@ -41,6 +42,10 @@ class Student_Account_Management:
         self.var_mother_first_name = StringVar()
         self.var_mother_last_name = StringVar()
         self.var_mother_email = StringVar()
+
+        # Search Variables
+        self.var_search_by_combobox = StringVar()
+        self.var_search = StringVar()
 ############################################################################################################################################
 #==========================================================================================================================================#
 #                                                                UI DESIGN
@@ -132,7 +137,7 @@ class Student_Account_Management:
         mother_first_name_label = Label(Mother_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
         mother_first_name_label.grid(row=0, column=0, padx=4, pady=5, sticky=W)
 
-        mother_first_name_textbox = ttk.Entry(Mother_Information_Frame, width=25, textvariable=self.var_father_first_name, font=("Segoe UI Variable", 12, "bold"),)
+        mother_first_name_textbox = ttk.Entry(Mother_Information_Frame, width=25, textvariable=self.var_mother_first_name, font=("Segoe UI Variable", 12, "bold"),)
         mother_first_name_textbox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
 
         # Adding mother's last name label and text box
@@ -158,21 +163,21 @@ class Student_Account_Management:
         search_label.grid(row=0, column=0, padx=15, pady=5, sticky=W)
 
         # Adding a Search by combo box
-        search_combobox=ttk.Combobox(Search_Frame, font=("Segoe UI Variable", 12, "bold"), width=17, state="readonly")
+        search_combobox=ttk.Combobox(Search_Frame, textvariable=self.var_search_by_combobox, font=("Segoe UI Variable", 12, "bold"), width=17, state="readonly")
         search_combobox["values"] = ("Select", "Student ID", "Student Name", "Date of Birth")
         search_combobox.current(0)
         search_combobox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
 
         # Adding an entry field textbox
-        search_entry_textbox = ttk.Entry(Search_Frame, width=26, font=("Segoe UI Variable", 12, "bold"))
+        search_entry_textbox = ttk.Entry(Search_Frame, textvariable=self.var_search, width=26, font=("Segoe UI Variable", 12, "bold"))
         search_entry_textbox.grid(row=0, column=2, padx=5, pady=5, sticky=W)
 
         # Adding a Search button
-        search_button = Button(Search_Frame, width=23, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        search_button = Button(Search_Frame, command=self.search_button, width=23, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
         search_button.grid(row=0, column=3,padx=5, pady=5, sticky=W)
         
         # Adding a Show All button
-        show_all_button = Button(Search_Frame, width=23, text="Show All", cursor="hand2", command=self.fetch_data, font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
+        show_all_button = Button(Search_Frame, command=self.fetch_data, width=23, text="Show All", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
         show_all_button.grid(row=0, column=4, padx=5, pady=5, sticky=W)
 #============================================================================================================================================================================================================
         # Table Frame
@@ -293,6 +298,7 @@ class Student_Account_Management:
                 self.student_table.insert("", END, values=i)
             conn.commit()
         conn.close()
+
     # Get Cursor
     def get_cursor(self, event=""):
         cursor_focus = self.student_table.focus()
@@ -468,8 +474,6 @@ class Student_Account_Management:
             except Exception as es:
                 messagebox.showerror("Error", f"Due to: {str(es)}", parent=self.root)
     # ------------------------------------------------------------------------------------------------------------------------ #
-    
-    # ------------------------------------------------------------------------------------------------------------------------ #
     # Train the classifier using these face captures
     def train_data_button(self):
         data_dir = ("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Data")
@@ -495,6 +499,28 @@ class Student_Account_Management:
         classifier.write("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Trained_Faces.xml")
         cv2.destroyWindow("Training")
         messagebox.showinfo("Training Success", "Datasets have been trained successfully.")
+    # ------------------------------------------------------------------------------------------------------------------------ #
+    # Search button implementation
+    def search_button(self):
+        if self.var_search_by_combobox.get()=="Select":
+            messagebox.showerror("Error", "Please select an option to search by")
+        elif self.var_search.get()=="":
+            messagebox.showerror("Error", "Please enter the data you want to search for in the search textbox")
+        else:
+            try:
+                conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                my_cursor = conn.cursor()
+                my_cursor.execute("SELECT * FROM tbl_student WHERE " + str(self.var_search_by_combobox.get()) + " LIKE '%" + str(self.var_search.get()) + " %'")
+                data = my_cursor.fetchall()
+                if len(data)!=0:
+                    self.student_table.delete(*self.student_table.get_children())
+                    for i in data:
+                        self.student_table.insert("", END, values=i)
+                    conn.commit()
+                conn.close()
+            except Exception as es:
+                messagebox.showerror("Error", f"Due to: {str(es)}", parent=self.root)
+
 # ---------------------------------------------------------------------------------------------------------------------------- #
 
 # This piece of code helps in calling class Face_Recognition_System

@@ -12,7 +12,8 @@ class Face_Recognition_System:
     # This is the constructor of the class Face_Recognition_System
     def __init__(self, root):
         self.root = root
-        self.root.geometry("1090x645+0+0")
+        self.root.geometry("1090x645+75+70")
+        self.root.resizable(width=False, height=False)
         self.root.title("IREG")
         
         # Main Frame: This will contain all the buttons
@@ -59,22 +60,23 @@ class Face_Recognition_System:
     def Start_Attendance(self):
         self.new_window = Toplevel(self.root)
         self.app = Start_Attendance(self.new_window)
+        self.root.withdraw()
         
 
     def View_Attendance(self):
         self.new_window = Toplevel(self.root)
         self.app = View_Attendance(self.new_window)
-        
+        self.root.withdraw()
 
     def Account_Management(self):
         self.new_window = Toplevel(self.root)
         self.app = Account_Management(self.new_window)
-        
+        self.root.withdraw()
 
     def Settings(self):
         self.new_window = Toplevel(self.root)
         self.app = Settings(self.new_window)
-        
+        self.root.withdraw()
 
                                   
 # This piece of code helps in calling class Face_Recognition_System
