@@ -3,13 +3,12 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from PIL import Image, ImageTk
-import os
-import numpy as np
-import cv2
 import mysql.connector
 from time import strftime
 from datetime import datetime
-import numpy
+import os
+import numpy as np
+import cv2
 
 # Creating a class for the UI
 class Face_Recognition:
@@ -31,19 +30,21 @@ class Face_Recognition:
         face_recognition_Button = Button(mainFrame, text="Face Recognition", cursor="hand2", command=self.face_recognition, font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="Light Yellow")
         face_recognition_Button.place(x=5,y=5, width=287, height=50)
 # ========================================================================================================================================= #
-    #def mark_attendance(self, fetch_student_id, fetch_first_name, fetch_last_name):
-    #    with open("C:/Users/utkarshjain120/Desktop/IREG-Image-Registartion-Based-Attendance-Mangement-System/Attendance.csv","r+", newline="/n") as f:
-    #        myDataList = f.readlines()
-    #        name_list = []
+    def mark_attendance(self, student_id, first_name, last_name):
+        with open("C:/Users/utkarshjain120/Source/Repos/IREG-Image-Registartion-Based-Attendance-Mangement-System/IREG_Main_Menu/Attendance.csv","r+", newline="\n") as f:
+            myDataList = f.readlines()
+            name_list = []
 
-    #        for line in myDataList:
-    #            entry = line.split(",")
-    #            name_list.append(entry[0])
-    #        if ((fetch_student_id not in name_list) and (fetch_first_name not in name_list) and (fetch_last_name not in name_list)):
-    #            now = datetime.now()
-    #            attendance_time = now.strftime("%d/%m/%Y")
-    #            attendane_date = now.strftime("%H:%M:%S")
-    #            f.writelines(f"/n{fetch_student_id},{fetch_first_name},{fetch_last_name},{attendane_date},{attendance_time},Preset")
+            for line in myDataList:
+                entry = line.split((","))
+                name_list.append(entry[0])
+                print(student_id not in name_list)
+            if ((student_id not in name_list) and (first_name not in name_list) and (last_name not in name_list)):
+                now = datetime.now()
+                attendance_time = now.strftime("%d/%m/%Y")
+                attendance_date = now.strftime("%H:%M:%S")
+                print(f"\n{student_id},{first_name},{last_name},{attendance_date},{attendance_time},Present")
+                f.writelines(f"\n{student_id},{first_name},{last_name},{attendance_date},{attendance_time},Present")
 
 # ========================================================================================================================================= #
     # Button Implementation
@@ -67,17 +68,11 @@ class Face_Recognition:
                 my_cursor = conn.cursor()
 
 
-                my_cursor.execute("SELECT Student_ID FROM tbl_Student WHERE Student_ID=" + str(id))
-                fetch_student_id = my_cursor.fetchone()
-                fetch_student_id = "+".join(str(fetch_student_id))
-
-                my_cursor.execute("SELECT First_Name FROM tbl_Student WHERE Student_ID=" + str(id))
-                fetch_first_name = my_cursor.fetchone()
-                fetch_first_name = "+".join(fetch_first_name)
-
-                my_cursor.execute("SELECT Last_Name FROM tbl_Student WHERE Student_ID=" + str(id))
-                fetch_last_name = my_cursor.fetchone()
-                fetch_last_name = "+".join(fetch_last_name)
+                my_cursor.execute("SELECT * FROM tbl_Student WHERE Student_ID=" + str(id))
+                data = my_cursor.fetchall()
+                fetch_student_id = data[0][0]
+                fetch_first_name = data[0][1]
+                fetch_last_name = data[0][2]
 
                 # Confidence is the percentage of difference from the original image. Lower the confidence, the result is more 
                 # accurate and vice versa
@@ -85,10 +80,10 @@ class Face_Recognition:
                     cv2.putText(img, f"Student ID: {fetch_student_id}", (x, y-60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 3)
                     cv2.putText(img, f"First Name: {fetch_first_name}", (x, y-35), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 3)
                     cv2.putText(img, f"Last Name: {fetch_last_name}", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 3)
-                    #self.mark_attendance(fetch_student_id, fetch_first_name, fetch_last_name)
+                    self.mark_attendance(fetch_student_id, fetch_first_name, fetch_last_name)
                 else:
                     cv2.rectangle(img, (x, y), (x+w, y+h), (0 , 0, 255), 3)
-                    cv2.putText(img, "Unknown Face", (x, y-5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (000, 000, 255), 3)
+                    cv2.putText(img, "Unknown Face", (x, y-10), cv2.FONT_HERSHEY_COMPLEX, 0.8, (000, 000, 255), 3)
 
                 coord = [x, y, w, h]
 

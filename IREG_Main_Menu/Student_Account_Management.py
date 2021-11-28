@@ -30,7 +30,7 @@ class Student_Account_Management:
         self.var_student_email = StringVar()
         self.var_first_name = StringVar()
         self.var_last_name = StringVar()
-        self.var_year_of_admission = StringVar()
+        self.var_date_of_admission = StringVar()
         self.var_date_of_birth = StringVar()
         
         # Variables related to the father
@@ -83,12 +83,12 @@ class Student_Account_Management:
         last_name_textbox = ttk.Entry(Student_Information_Frame, width=25, textvariable=self.var_last_name, font=("Segoe UI Variable", 12, "bold"),)
         last_name_textbox.grid(row=2, column=3, padx=5, pady=5, sticky=W)
 
-        # Adding a Student Year of Admission label and textbox
-        year_of_admission_label = Label(Student_Information_Frame, text = "Year of Admission: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
-        year_of_admission_label.grid(row=3, column=0, padx=5, pady=5, sticky=W)
+        # Adding a Student Date Of Admission label and textbox
+        date_of_admission_label = Label(Student_Information_Frame, text = "Date Of Admission: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
+        date_of_admission_label.grid(row=3, column=0, padx=5, pady=5, sticky=W)
         
-        year_of_admission_textbox = ttk.Entry(Student_Information_Frame,width=25, textvariable=self.var_year_of_admission, font=("Segoe UI Variable", 12, "bold"),)
-        year_of_admission_textbox.grid(row=3, column=1, padx=5, pady=5, sticky=W)
+        date_of_admission_textbox = ttk.Entry(Student_Information_Frame,width=25, textvariable=self.var_date_of_admission, font=("Segoe UI Variable", 12, "bold"),)
+        date_of_admission_textbox.grid(row=3, column=1, padx=5, pady=5, sticky=W)
 
         # Adding a date of birth label and textbox
         date_of_birth_label = Label(Student_Information_Frame, text = "Date of Birth: ", font=("Segoe UI Variable", 12, "bold"), bg = "Light Yellow")
@@ -164,7 +164,7 @@ class Student_Account_Management:
 
         # Adding a Search by combo box
         search_combobox=ttk.Combobox(Search_Frame, textvariable=self.var_search_by_combobox, font=("Segoe UI Variable", 12, "bold"), width=17, state="readonly")
-        search_combobox["values"] = ("Select", "Student ID", "Student Name", "Date of Birth")
+        search_combobox["values"] = ("Select", "Student_ID", "First_Name", "Last_Name","Date_of_Birth", "Date_Of_Admission")
         search_combobox.current(0)
         search_combobox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
 
@@ -188,7 +188,7 @@ class Student_Account_Management:
         scroll_x = ttk.Scrollbar(Table_Frame, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(Table_Frame, orient=VERTICAL)
         
-        self.student_table = ttk.Treeview(Table_Frame, column=("std_ID", "first_name", "last_name", "email", "year_of_admission", "date_of_birth", "father_first_name", "father_last_name", "father_email", "mother_first_name", "mother_last_name", "mother_email"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+        self.student_table = ttk.Treeview(Table_Frame, column=("std_ID", "first_name", "last_name", "email", "date_of_admission", "date_of_birth", "father_first_name", "father_last_name", "father_email", "mother_first_name", "mother_last_name", "mother_email"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
         
         scroll_x.pack(side=BOTTOM, fill=X)
         scroll_y.pack(side=RIGHT, fill=Y)
@@ -200,7 +200,7 @@ class Student_Account_Management:
         self.student_table.heading("first_name", text="First Name")
         self.student_table.heading("last_name", text="Last Name")
         self.student_table.heading("email", text="Email")
-        self.student_table.heading("year_of_admission", text="Year Of Admission")
+        self.student_table.heading("date_of_admission", text="Date Of Admission")
         self.student_table.heading("date_of_birth", text="Date Of Birth")
         self.student_table.heading("father_first_name", text="Father's First Name")
         self.student_table.heading("father_last_name", text="Father's Last Name")
@@ -214,7 +214,7 @@ class Student_Account_Management:
         self.student_table.column("first_name", width=130)
         self.student_table.column("last_name", width=130)
         self.student_table.column("email", width=130)
-        self.student_table.column("year_of_admission", width=120)
+        self.student_table.column("date_of_admission", width=120)
         self.student_table.column("date_of_birth", width=120)
         self.student_table.column("father_first_name", width=130) 
         self.student_table.column("father_last_name", width=130)
@@ -226,6 +226,7 @@ class Student_Account_Management:
         self.student_table.bind("<ButtonRelease>", self.get_cursor)
         self.student_table.pack(fill=BOTH, expand=1)
         self.fetch_data()
+
 # ==========================================================================================================================================#
         # Adding a button frame which will have the save, update and delete button
         Button_Frame = Frame(mainFrame, bd=2, relief=RIDGE, bg="Light Yellow")
@@ -258,7 +259,7 @@ class Student_Account_Management:
 # ------------------------------------------------------------------------------------------------------------------------------------------#
     # Function for adding in the data when the user clicks on the add student button
     def add_student_button(self):
-        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_date_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
             messagebox.showerror("Error", "All fields are required", parent=self.root)
         else:
             try:
@@ -269,7 +270,7 @@ class Student_Account_Management:
                                                                                                          self.var_first_name.get(),
                                                                                                          self.var_last_name.get(),
                                                                                                          self.var_student_email.get(),
-                                                                                                         self.var_year_of_admission.get(),
+                                                                                                         self.var_date_of_admission.get(),
                                                                                                          self.var_date_of_birth.get(),
                                                                                                          self.var_father_first_name.get(),
                                                                                                          self.var_father_last_name.get(),
@@ -308,7 +309,7 @@ class Student_Account_Management:
         self.var_first_name.set(data[1]),
         self.var_last_name.set(data[2]),
         self.var_student_email.set(data[3]),
-        self.var_year_of_admission.set(data[4]),
+        self.var_date_of_admission.set(data[4]),
         self.var_date_of_birth.set(data[5]),
         self.var_father_first_name.set(data[6]),
         self.var_father_last_name.set(data[7]),
@@ -319,7 +320,7 @@ class Student_Account_Management:
 # ------------------------------------------------------------------------------------------------------------------------------------------#
     # Update button implementation
     def update_student_button(self):
-        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_date_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
             messagebox.showerror("Error", "All fields are required", parent=self.root)
         else:
             try:
@@ -327,11 +328,11 @@ class Student_Account_Management:
                 if update > 0:
                     conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
                     my_cursor = conn.cursor()
-                    my_cursor.execute("UPDATE tbl_student SET First_Name=%s, Last_Name=%s, Email=%s, Year_Of_Admission=%s, Date_Of_Birth=%s, Father_First_Name=%s, Father_Last_Name=%s, Father_Email=%s, Mother_First_Name=%s, Mother_Last_Name=%s, Mother_Email=%s WHERE Student_ID=%s",(
+                    my_cursor.execute("UPDATE tbl_student SET First_Name=%s, Last_Name=%s, Email=%s, date_of_admission=%s, Date_Of_Birth=%s, Father_First_Name=%s, Father_Last_Name=%s, Father_Email=%s, Mother_First_Name=%s, Mother_Last_Name=%s, Mother_Email=%s WHERE Student_ID=%s",(
                                                                                                          self.var_first_name.get(),
                                                                                                          self.var_last_name.get(),
                                                                                                          self.var_student_email.get(),
-                                                                                                         self.var_year_of_admission.get(),
+                                                                                                         self.var_date_of_admission.get(),
                                                                                                          self.var_date_of_birth.get(),
                                                                                                          self.var_father_first_name.get(),
                                                                                                          self.var_father_last_name.get(),
@@ -383,7 +384,7 @@ class Student_Account_Management:
         self.var_student_email.set(""),
         self.var_first_name.set(""),
         self.var_last_name.set(""),
-        self.var_year_of_admission.set(""),
+        self.var_date_of_admission.set(""),
         self.var_date_of_birth.set(""),
         self.var_father_first_name.set(""),
         self.var_father_last_name.set(""),
@@ -394,7 +395,7 @@ class Student_Account_Management:
 # -------------------------------------------------------------------------------------------------------------------------------------------#
     def capture_face_button(self):
         # Validation that all fields are filled up
-        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_year_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
+        if self.var_student_ID.get()=="" or self.var_student_email.get()=="" or self.var_first_name.get()=="" or self.var_last_name.get()=="" or self.var_date_of_admission.get()=="" or self.var_date_of_birth.get()=="" or self.var_father_first_name.get()=="" or self.var_father_last_name.get()=="" or self.var_father_email.get()=="" or self.var_mother_first_name.get()=="" or self.var_mother_last_name.get()=="" or self.var_mother_email.get()=="":
             messagebox.showerror("Error", "All fields are required", parent=self.root)
         else:
             # Added a try box to get rid pf any exceptions which might arise
@@ -409,11 +410,11 @@ class Student_Account_Management:
                 # Therfore, we create a loop to manage the IDs
                 for x in myresult:
                     id += 1
-                my_cursor.execute("UPDATE tbl_student SET First_Name=%s, Last_Name=%s, Email=%s, Year_Of_Admission=%s, Date_Of_Birth=%s, Father_First_Name=%s, Father_Last_Name=%s, Father_Email=%s, Mother_First_Name=%s, Mother_Last_Name=%s, Mother_Email=%s WHERE Student_ID=%s",(
+                my_cursor.execute("UPDATE tbl_student SET First_Name=%s, Last_Name=%s, Email=%s, date_of_admission=%s, Date_Of_Birth=%s, Father_First_Name=%s, Father_Last_Name=%s, Father_Email=%s, Mother_First_Name=%s, Mother_Last_Name=%s, Mother_Email=%s WHERE Student_ID=%s",(
                                                                                                          self.var_first_name.get(),
                                                                                                          self.var_last_name.get(),
                                                                                                          self.var_student_email.get(),
-                                                                                                         self.var_year_of_admission.get(),
+                                                                                                         self.var_date_of_admission.get(),
                                                                                                          self.var_date_of_birth.get(),
                                                                                                          self.var_father_first_name.get(),
                                                                                                          self.var_father_last_name.get(),
@@ -502,10 +503,11 @@ class Student_Account_Management:
     # ------------------------------------------------------------------------------------------------------------------------ #
     # Search button implementation
     def search_button(self):
-        if self.var_search_by_combobox.get()=="Select":
-            messagebox.showerror("Error", "Please select an option to search by")
-        elif self.var_search.get()=="":
-            messagebox.showerror("Error", "Please enter the data you want to search for in the search textbox")
+        if self.var_search_by_combobox.get()=="Select" or self.var_search.get()=="":
+            if self.var_search_by_combobox.get()=="Select":
+                messagebox.showerror("Error", "Please select an option to search by")
+            else:
+                messagebox.showerror("Error", "Please enter the data you want to search for in the search textbox")
         else:
             try:
                 conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
