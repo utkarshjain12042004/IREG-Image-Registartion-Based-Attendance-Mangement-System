@@ -17,7 +17,7 @@ class Face_Recognition_System:
         self.root.title("IREG")
         
         # Main Frame: This will contain all the buttons
-        mainFrame = Frame(bd=2, bg="Light Yellow", relief = RIDGE)
+        mainFrame = Frame(bd=2, bg="Light Yellow", relief = SOLID)
         mainFrame.place(x=2, y=2, width=1086, height=640) 
 
 

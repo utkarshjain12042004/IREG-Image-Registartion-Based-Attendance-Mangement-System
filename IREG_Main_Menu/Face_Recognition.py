@@ -20,7 +20,7 @@ class Face_Recognition:
         self.root.title("Face Recognition")
         
         # Main Frame: This will contain all the buttons
-        mainFrame = Frame(bd=2, bg="Light Yellow", relief = RIDGE)
+        mainFrame = Frame(bd=2, bg="Light Yellow", relief = SOLID)
         mainFrame.place(x=2, y=2, width=1086, height=640) 
 
         # Label Frame
@@ -38,14 +38,14 @@ class Face_Recognition:
             for line in myDataList:
                 entry = line.split((","))
                 name_list.append(entry[0])
-                print(student_id not in name_list)
-            if ((student_id not in name_list) and (first_name not in name_list) and (last_name not in name_list)):
+
+            if ((student_id not in name_list)):
                 now = datetime.now()
                 attendance_time = now.strftime("%d/%m/%Y")
                 attendance_date = now.strftime("%H:%M:%S")
-                print(f"\n{student_id},{first_name},{last_name},{attendance_date},{attendance_time},Present")
+                name_list.append(student_id)
+                print(student_id in name_list)
                 f.writelines(f"\n{student_id},{first_name},{last_name},{attendance_date},{attendance_time},Present")
-
 # ========================================================================================================================================= #
     # Button Implementation
     def face_recognition(self):
@@ -77,9 +77,9 @@ class Face_Recognition:
                 # Confidence is the percentage of difference from the original image. Lower the confidence, the result is more 
                 # accurate and vice versa
                 if confidence > 77:
-                    cv2.putText(img, f"Student ID: {fetch_student_id}", (x, y-60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 3)
-                    cv2.putText(img, f"First Name: {fetch_first_name}", (x, y-35), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 3)
-                    cv2.putText(img, f"Last Name: {fetch_last_name}", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 3)
+                    cv2.putText(img, f"Student ID: {fetch_student_id}", (x, y-60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 3)
+                    cv2.putText(img, f"First Name: {fetch_first_name}", (x, y-35), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 3)
+                    cv2.putText(img, f"Last Name: {fetch_last_name}", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 3)
                     self.mark_attendance(fetch_student_id, fetch_first_name, fetch_last_name)
                 else:
                     cv2.rectangle(img, (x, y), (x+w, y+h), (0 , 0, 255), 3)

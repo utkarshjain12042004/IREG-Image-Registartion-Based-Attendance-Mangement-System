@@ -7,6 +7,7 @@ import os
 import numpy as np
 import cv2
 import mysql.connector
+from datetime import datetime
 
 class Student_Account_Management:
     def __init__(self, root):
@@ -96,7 +97,6 @@ class Student_Account_Management:
 
         date_of_birth_textbox = ttk.Entry(Student_Information_Frame,width=25, textvariable=self.var_date_of_birth, font=("Segoe UI Variable", 12, "bold"),)
         date_of_birth_textbox.grid(row=3, column=3, padx=5, pady=5, sticky=W)
-
 # ========================================================================================================================================================
         # Parent Information Frame: This frame have the fields asking information for the student's parents
         Parent_Information_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE, text="Parent Details", font=("Segoe UI Variable", 12, "bold"),)
