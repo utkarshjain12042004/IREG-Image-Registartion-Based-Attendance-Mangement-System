@@ -8,7 +8,7 @@ from Settings import Settings
 
 
 # Creating a class for the UI
-class Face_Recognition_System:
+class IREG_Main_Menu:
     # This is the constructor of the class Face_Recognition_System
     def __init__(self, root):
         self.root = root
@@ -82,7 +82,7 @@ class Face_Recognition_System:
 # This piece of code helps in calling class Face_Recognition_System
 if __name__=="__main__":
     root = Tk()
-    obj = Face_Recognition_System(root)
+    obj = IREG_Main_Menu(root)
     root.mainloop()
 
 

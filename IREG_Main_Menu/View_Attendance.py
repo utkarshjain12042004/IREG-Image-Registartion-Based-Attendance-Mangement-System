@@ -16,37 +16,31 @@ class View_Attendance:
         self.root.title("IREG: Start Attendance")
         
         # Main Frame: This will contain all the buttons
-        mainFrame = Frame(bd = 2, bg = "Light Yellow", relief = SOLID)
-        mainFrame.place(x = 2, y = 2, width = 1086, height = 640) 
+        self.mainFrame = Frame(bd = 2, bg = "Light Yellow", relief = RIDGE)
+        self.mainFrame.place(x = 2, y = 2, width = 1086, height = 640) 
 
         # Label Frame
-        View_Attendance_lbl =  Label(mainFrame, text = "IREG: View Attendance", font = ("Segoe UI Variable", 45, "bold"), bg = "Light Yellow", fg = "Black")
+        View_Attendance_lbl =  Label(self.mainFrame, text = "IREG: View Attendance", font = ("Segoe UI Variable", 45, "bold"), bg = "Light Yellow", fg = "Black")
         View_Attendance_lbl.place(x = 108, y = 5, width = 870, height = 75)
 
-        def update_current_date_and_time():
-            # Obtaining the current Date and time labels
-            current_date_and_time = datetime.now()
+        # Obtaining the current Date and time labels
+        current_date_and_time = datetime.now()
 
-            # Current Day Label
-            Current_Day_lbl = Label(mainFrame, text = datetime.today().strftime("%A"), font = ("Calibri", 12, "bold"), bg = "Light Yellow", fg = "Black")
-            Current_Day_lbl.place(x = 1016, y = 71, width = 65, height = 15)
+        # Current Day Label
+        Current_Day_lbl = Label(self.mainFrame, text = datetime.today().strftime("%A"), font = ("Calibri", 12, "bold"), bg = "Light Yellow", fg = "Black")
+        Current_Day_lbl.place(x = 1016, y = 579, width = 65, height = 15)
 
-            # Current date label
-            Current_Date_lbl =  Label(mainFrame, text = current_date_and_time.strftime("%d/%m/%y"), font = ("Calibri", 12, "bold"), bg = "Light Yellow", fg = "Black")
-            Current_Date_lbl.place(x = 1016, y = 91, width = 65, height = 15)
+        # Current date label
+        Current_Date_lbl =  Label(self.mainFrame, text = current_date_and_time.strftime("%d/%m/%y"), font = ("Calibri", 12, "bold"), bg = "Light Yellow", fg = "Black")
+        Current_Date_lbl.place(x = 1016, y = 599, width = 65, height = 15)
 
-            # Current time label
-            Current_Time_lbl =  Label(mainFrame, text = current_date_and_time.strftime("%H:%M:%S"), font = ("Calibri", 12, "bold"), bg = "Light Yellow", fg = "Black")
-            Current_Time_lbl.place(x = 1016, y = 111, width = 65, height = 15)
-
-            root.after(1000, update_current_date_and_time())
-
-        update_current_date_and_time()
-
+        # Current time label
+        Current_Time_lbl =  Label(self.mainFrame, text = current_date_and_time.strftime("%H:%M:%S"), font = ("Calibri", 12, "bold"), bg = "Light Yellow", fg = "Black")
+        Current_Time_lbl.place(x = 1016, y = 619, width = 65, height = 15)
 
         # Period Frame
-        Period_Frame =  LabelFrame(mainFrame, bd = 2, bg = "Light Yellow", relief = SOLID, text = "Timetable", font = ("Segoe UI Variable", 12, "bold"))
-        Period_Frame.place(x = 2, y = 131, width = 1078, height = 503)
+        Period_Frame =  LabelFrame(self.mainFrame, bd = 2, bg = "Light Yellow", relief = RIDGE, text = "Timetable", font = ("Segoe UI Variable", 12, "bold"))
+        Period_Frame.place(x = 2, y = 71, width = 1078, height = 503)
 
         # Adding the headings to the rows and columns
         # Adding the headings to the columns
@@ -121,7 +115,7 @@ class View_Attendance:
 
                 # Adding the button
                 period_Button = Button(Period_Frame, text = f"""{data[0][1]}
-{data[0][2]}""", cursor = "hand2", font = ("Segoe UI Variable", 12, "bold"), bg = "Light Yellow", fg = "Black", width = 20, height = 4, bd=2, relief = SOLID)
+{data[0][2]}""", cursor = "hand2", font = ("Segoe UI Variable", 12, "bold"), bg = "Light Yellow", fg = "Black", width = 20, height = 4, bd=2, relief = SOLID, command=lambda: test(self, f"{column_counter}", f"{period_number}" f"{subject_id}"))
                 period_Button.config(anchor = CENTER)
                 period_Button.grid(row = row_counter, column = column_counter)
 
@@ -130,114 +124,17 @@ class View_Attendance:
             row_counter += 1
 
 
+        def clearFrame(self):
+            for widget in self.mainFrame.winfo_children():
+                widget.destroy
+
+    def test(day_number, period_number, subject):
+        print(f"""You have: 
+day_number = {day_number}
+period_number = {period_number}
+subject_id = {subject}""")
+
         
-
-
-
-
-
-
-
-#        while column_counter<5:
-#            # Getting the subject ID which is the used to get the name and room of the subject 
-#            subject_query = "SELECT Period_1 FROM tbl_timetable WHERE Timetable_ID = %s"
-#            my_cursor.execute(subject_query, (column_counter+1,))
-#            subject_id = my_cursor.fetchall()[0][0]
-#            subject_query = "SELECT * FROM tbl_subjects WHERE Subject_ID = %s"
-#            my_cursor.execute(subject_query, (subject_id,))
-#            data = my_cursor.fetchall()
-
-#            # Adding the button
-#            period_Button = Button(Period_Frame, text = f"""{data[0][1]}
-#{data[0][2]}""", cursor = "hand2", font = ("Segoe UI Variable", 12, "bold"), bg = "Light Yellow", fg = "Black", width = 20, height = 4, bd=2, relief = SOLID)
-#            period_Button.config(anchor = CENTER)
-#            period_Button.grid(row = 1, column = column_counter+1)
-
-#            column_counter += 1
-
-#        # Loop for generating buttons for Tuesday
-#        column_counter1 = 0
-#        while column_counter1<5:
-#                # Getting the subject ID which is the used to get the name and room of the subject 
-#                subject_query = "SELECT Period_2 FROM tbl_timetable WHERE Timetable_ID = %s"
-#                my_cursor.execute(subject_query, (column_counter1+1,))
-#                subject_id = my_cursor.fetchall()[0][0]
-#                subject_query = "SELECT * FROM tbl_subjects WHERE Subject_ID = %s"
-#                my_cursor.execute(subject_query, (subject_id,))
-#                data = my_cursor.fetchall()
-
-#                # Adding the button
-#                period_Button = Button(Period_Frame, text = f"""{data[0][1]}
-#{data[0][2]}""", cursor = "hand2", font = ("Segoe UI Variable", 12, "bold"), bg = "Black", fg = "Light Yellow", width = 20, height = 4)
-#                period_Button.config(anchor = CENTER)
-#                period_Button.grid(row = 2, column = column_counter1+1, pady=5)
-
-#                column_counter1 += 1
-        
-#        # Loop for generating buttons for Wednesday
-#        column_counter2 = 0
-#        while column_counter2<5:
-#            # Getting the subject ID which is the used to get the name and room of the subject 
-#            subject_query = "SELECT Period_3 FROM tbl_timetable WHERE Timetable_ID = %s"
-#            my_cursor.execute(subject_query, (column_counter2+1,))
-#            subject_id = my_cursor.fetchall()[0][0]
-#            subject_query = "SELECT * FROM tbl_subjects WHERE Subject_ID = %s"
-#            my_cursor.execute(subject_query, (subject_id,))
-#            data = my_cursor.fetchall()
-        
-#            # Adding the button
-#            period_Button = Button(Period_Frame, text = f"""{data[0][1]}
-#{data[0][2]}""", cursor = "hand2", font = ("Segoe UI Variable", 12, "bold"), bg = "Black", fg = "Light Yellow", width = 20, height = 4)
-#            period_Button.config(anchor = CENTER)
-#            period_Button.grid(row = 3, column = column_counter2+1, pady=5)
-        
-#            column_counter2 += 1
-
-#        # Loop for generating buttons for Thursday
-#        column_counter3 = 0
-#        while column_counter3<5:
-#            # Getting the subject ID which is the used to get the name and room of the subject 
-#            subject_query = "SELECT Period_4 FROM tbl_timetable WHERE Timetable_ID = %s"
-#            my_cursor.execute(subject_query, (column_counter3+1,))
-#            subject_id = my_cursor.fetchall()[0][0]
-#            subject_query = "SELECT * FROM tbl_subjects WHERE Subject_ID = %s"
-#            my_cursor.execute(subject_query, (subject_id,))
-#            data = my_cursor.fetchall()
-            
-#            # Adding the button
-#            period_Button = Button(Period_Frame, text = f"""{data[0][1]}
-#{data[0][2]}""", cursor = "hand2", font = ("Segoe UI Variable", 12, "bold"), bg = "Black", fg = "Light Yellow", width = 20, height = 4)
-#            period_Button.config(anchor = CENTER)
-#            period_Button.grid(row = 4, column = column_counter3+1, pady=5)
-
-#            column_counter3 += 1
-
-#        # Loop for generating buttons for Friday
-#        column_counter4 = 0
-#        while column_counter4<5:
-#            # Getting the subject ID which is the used to get the name and room of the subject 
-#            subject_query = "SELECT Period_5 FROM tbl_timetable WHERE Timetable_ID = %s"
-#            my_cursor.execute(subject_query, (column_counter4+1,))
-#            subject_id = my_cursor.fetchall()[0][0]
-#            subject_query = "SELECT * FROM tbl_subjects WHERE Subject_ID = %s"
-#            my_cursor.execute(subject_query, (subject_id,))
-#            data = my_cursor.fetchall()
-            
-#            # Adding the button
-#            period_Button = Button(Period_Frame, text = f"""{data[0][1]}
-#{data[0][2]}""", cursor = "hand2", font = ("Segoe UI Variable", 12, "bold"), bg = "Black", fg = "Light Yellow", width = 20, height = 4)
-#            period_Button.config(anchor = CENTER)
-#            period_Button.grid(row = 5, column = column_counter4+1, pady=5)
-
-#            column_counter4 += 1
-
-
-
-
-
-
-
-
 
 
 # This piece of code helps in calling class Face_Recognition_System
