@@ -56,7 +56,7 @@ class Start_Attendance:
         manual_attendance_method_button.place(x=5,y=5, width=400, height=50)
 
         # Automated Attendance Method Button
-        automated_attendance_method_Button =  Button(Button_Frame, text="Automated Attendance Method", cursor="hand2", command=lambda:[ self.automated_attendance_method_button(), self.clearFrame()], font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="Light Yellow")
+        automated_attendance_method_Button =  Button(Button_Frame, text="Automated Attendance Method", cursor="hand2", command= self.automated_attendance_method_button, font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="Light Yellow")
         automated_attendance_method_Button.place(x=5,y=60, width=400, height=50)
 
     
@@ -135,6 +135,13 @@ class Start_Attendance:
             for line in myDataList:
                 entry = line.split((","))
                 name_list.append(entry[0])
+                with open("C:/Users/utkarshjain120/Source/Repos/IREG-Image-Registartion-Based-Attendance-Mangement-System/IREG_Main_Menu/Attendance.csv","r+", newline="\n") as f:
+                    myDataList = f.readlines()
+                    name_list = []
+
+            with open("C:/Users/utkarshjain120/Source/Repos/IREG-Image-Registartion-Based-Attendance-Mangement-System/IREG_Main_Menu/Attendance.csv","r+", newline="\n") as f:
+                myDataList = f.readlines()
+                name_list = []
 
             if ((student_id not in name_list) and (first_name not in name_list) and (last_name not in name_list)):
                 now = datetime.now()

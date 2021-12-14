@@ -251,6 +251,20 @@ class Student_Account_Management:
         # Clear All Data button
         clear_all_button = Button(Button_Frame, width=25, height=2, command= self.clear_all_button, text="Clear All Fields", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="Light Yellow")
         clear_all_button.grid(row=4, padx=5, pady=4)
+
+
+
+        # Test frame
+        mainFrame = Frame(mainFrame, bd=2, bg="Light Yellow", relief = RIDGE)
+        mainFrame.place(x=2, y=2, width=500, height=300)
+
+
+
+
+
+
+
+
 #                                                            END OF UI DESIGN
 #===========================================================================================================================================#
 #############################################################################################################################################

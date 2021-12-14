@@ -97,6 +97,11 @@ class View_Attendance:
         conn.commit()
         conn.close()
 
+        def clearFrame():
+            print("Clear Frame function is executing now")
+            for widget in self.mainFrame.winfo_children():
+                widget.destroy()
+
         # Button Generator Loop
         conn = mysql.connector.connect(host = "localhost", username = "root", password = "utkarshjain120", database = "ireg")
         my_cursor = conn.cursor()
@@ -115,7 +120,7 @@ class View_Attendance:
 
                 # Adding the button
                 period_Button = Button(Period_Frame, text = f"""{data[0][1]}
-{data[0][2]}""", cursor = "hand2", font = ("Segoe UI Variable", 12, "bold"), bg = "Light Yellow", fg = "Black", width = 20, height = 4, bd=2, relief = SOLID, command=lambda: test(self, f"{column_counter}", f"{period_number}" f"{subject_id}"))
+{data[0][2]}""", cursor = "hand2", font = ("Segoe UI Variable", 12, "bold"), bg = "Light Yellow", fg = "Black", width = 20, height = 4, bd=2, relief = SOLID, command=lambda: (View_Attendance.test(f"{column_counter}, {period_number}, {subject_id}"), clearFrame()))
                 period_Button.config(anchor = CENTER)
                 period_Button.grid(row = row_counter, column = column_counter)
 
@@ -124,15 +129,17 @@ class View_Attendance:
             row_counter += 1
 
 
-        def clearFrame(self):
-            for widget in self.mainFrame.winfo_children():
-                widget.destroy
 
-    def test(day_number, period_number, subject):
+    def test(period_information_string):
+        period_information = period_information_string.split(", ")
+        day_number = period_information[0]
+        period_number = period_information[1]
+        subject_id = period_information[2]
+
         print(f"""You have: 
 day_number = {day_number}
 period_number = {period_number}
-subject_id = {subject}""")
+subject_id = {subject_id}""")
 
         
 
