@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\IREG_Main_Menu"
+    "\\IREG_Main_Menu",
+    "\\IREG_Main_Menu\\Iteration 1"
   ],
-  "SelectedNode": "\\IREG_Main_Menu\\test.py",
-  "PreviewInSolutionExplorer": true
+  "SelectedNode": "\\IREG_Main_Menu\\Teacher_Account_Management.py",
+  "PreviewInSolutionExplorer": false
 }

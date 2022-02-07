@@ -1,10 +1,6 @@
 # Importing all the required modules to create the UI
 from tkinter import *
 from tkinter import ttk
-from Start_Attendance import Start_Attendance
-from View_Attendance import View_Attendance
-from Account_Management import Account_Management
-from Settings import Settings
 
 
 # Creating a class for the UI
@@ -20,14 +16,9 @@ class IREG_Main_Menu:
         mainFrame = Frame(bd=2, bg="Light Yellow", relief = SOLID)
         mainFrame.place(x=2, y=2, width=1086, height=640) 
 
-
         # Label Frame
         Image_Registration_lbl= Label(mainFrame, text="IREG: Image Registration", font=("Segoe UI Variable", 45, "bold"), bg="Light Yellow", fg="Black")
         Image_Registration_lbl.place(x=108, y=5, width=870, height=75)
-
-        # Label Frame 2
-        # title_lbl = Label(mainFrame, text="Image Registration", font=("Segoe UI Variable", 30, "bold"), bg="Light Yellow", fg="Black")
-        # title_lbl.place(x=45, y=45, width=300, height=50)
 
         # Button Frame
         Button_Frame= LabelFrame(mainFrame, bd=2, bg="Light Yellow", relief=RIDGE)
