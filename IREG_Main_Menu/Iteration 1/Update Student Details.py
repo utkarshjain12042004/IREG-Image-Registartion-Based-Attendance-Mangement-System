@@ -17,12 +17,12 @@ class Add_New_Student_Profile:
         mainFrame.place(x=2, y=2, width=1276, height=755) # Specifying the coordinates along with the dimensions of the frame
 
         # Label Frame
-        Add_New_Student_Profile_lbl= Label(mainFrame, text="Add New Student Profile", font=("Segoe UI Variable", 45, "bold"), bg="White", fg="Black")
+        Add_New_Student_Profile_lbl= Label(mainFrame, text="Update Student Profile", font=("Segoe UI Variable", 45, "bold"), bg="White", fg="Black")
         Add_New_Student_Profile_lbl.place(x=1, y=5, width=1270, height=75) # Specifying the coordinates along with the dimensions of the frame
 
         # Button Frame
-        Button_Frame= LabelFrame(mainFrame, bd=2, bg="White", relief=RIDGE)
-        Button_Frame.place(x=115, y=489, width=1045, height=245) # Specifying the coordinates along with the dimensions of the frame
+        Button_Frame= Frame(mainFrame, bd=2, bg="White", relief=RIDGE)
+        Button_Frame.place(x=885, y=460, width=380, height=290) # Specifying the coordinates along with the dimensions of the frame
 
         # ======================================================================================================================================== #
         # Student Information frame: This frame will contain all the fields asking for information related to the student
@@ -114,20 +114,89 @@ class Add_New_Student_Profile:
 
         #======================================== Adding in the buttons ========================================#
         # Add New Student Profile Button
-        add_new_student_Button = Button(Button_Frame, text="Add New Student Profile", cursor="hand2", font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="White", width=40, height=3)
-        add_new_student_Button.grid(row=0, column=0, padx=(20, 10), pady=(20, 10)) # Specifying the coordinates along with the dimensions of the frame
+        add_new_student_Button = Button(Button_Frame, text="Add New Student Profile", cursor="hand2", font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="White")
+        add_new_student_Button.place(x=5, y=5, height=65, width=365) # Specifying the coordinates along with the dimensions of the frame
 
         # Capture Student Face
-        capture_student_face_Button =  Button(Button_Frame, text="Capture Student Face", cursor="hand2", font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="White", width=40, height=3)
-        capture_student_face_Button.grid(row=0, column=1, padx=(10, 20), pady=(20, 10)) # Specifying the coordinates along with the dimensions of the frame
+        capture_student_face_Button =  Button(Button_Frame, text="Capture Student Face", cursor="hand2", font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="White")
+        capture_student_face_Button.place(x=5, y=75, height=65, width=365) # Specifying the coordinates along with the dimensions of the frame
 
         # Clear All Fields Button
-        clear_all_fields_Button = Button(Button_Frame, text="Clear All Fields", cursor="hand2", font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="White", width=40, height=3)
-        clear_all_fields_Button.grid(row=1, column=0, padx=(20, 10), pady=(10, 20)) # Specifying the coordinates along with the dimensions of the frame
+        clear_all_fields_Button = Button(Button_Frame, text="Clear All Fields", cursor="hand2", font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="White")
+        clear_all_fields_Button.place(x=5, y=145, height=65, width=365) # Specifying the coordinates along with the dimensions of the frame
        
         # Back to Student Account Management Button
-        back_to_student_account_management_Button = Button(Button_Frame, text="Back to Student Account Management", cursor="hand2", font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="White", width=40, height=3)
-        back_to_student_account_management_Button.grid(row=1, column=1, padx=(10, 20), pady=(10, 20)) # Specifying the coordinates along with the dimensions of the frame
+        back_to_student_account_management_Button = Button(Button_Frame, text="Back to Previous Page", cursor="hand2", font=("Segoe UI Variable", 15, "bold"), bg="Black", fg="White")
+        back_to_student_account_management_Button.place(x=5, y=216, height=65, width=365) # Specifying the coordinates along with the dimensions of the frame
+
+        # ======================================================================================================================================== #
+        # Search Frame: This frame will contain the search system which will be show the user all the student profiles created
+        Search_Frame= Frame(mainFrame, bd=2, bg="White", relief=RIDGE)
+        Search_Frame.place(x=5, y=460, width=875, height=285)
+
+        # Adding a search bar
+        search_label = Label(Search_Frame, text="Search By:", font=("Segoe UI Variable", 12, "bold"), bg="White", fg="Black")
+        search_label.grid(row=0, column=0, padx=5, pady=5, sticky=W)
+
+        # Adding a Search by combo box
+        search_combobox=ttk.Combobox(Search_Frame, font=("Segoe UI Variable", 12, "bold"), width=15, state="readonly")
+        search_combobox["values"] = ("Select", "Student ID", "First Name", "LastName","Date of Birth", "Date Of Admission")
+        search_combobox.current(0)
+        search_combobox.grid(row=0, column=1, padx=5, pady=5, sticky=W)
+
+        # Adding an entry field textbox
+        search_entry_textbox = ttk.Entry(Search_Frame, width=20, font=("Segoe UI Variable", 12, "bold"))
+        search_entry_textbox.grid(row=0, column=2, padx=5, pady=5, sticky=W)
+
+        # Adding a Search button
+        search_button = Button(Search_Frame, width=10, text="Search", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
+        search_button.grid(row=0, column=3,padx=5, pady=5, sticky=W)
+        
+        # Adding a Show All button
+        show_all_button = Button(Search_Frame, width=10, text="Show All", cursor="hand2", font=("Segoe UI Variable", 12, "bold"), bg="Black", fg="White")
+        show_all_button.grid(row=0, column=4, padx=5, pady=5, sticky=W)
+#============================================================================================================================================================================================================
+        # Table Frame
+        Table_Frame= Frame(Search_Frame, bd=2, bg="White", relief=RIDGE)
+        Table_Frame.place(x=0, y=45, width=870, height=235)
+
+        # Scroll Bar
+        scroll_x = ttk.Scrollbar(Table_Frame, orient=HORIZONTAL)
+        scroll_y = ttk.Scrollbar(Table_Frame, orient=VERTICAL)
+        
+        self.student_table = ttk.Treeview(Table_Frame, column=("std_ID", "first_name", "last_name", "email", "date_of_admission", "date_of_birth", "father_name", "father_email", "mother_name", "mother_email"), 
+                                          xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+        
+        scroll_x.pack(side=BOTTOM, fill=X)
+        scroll_y.pack(side=RIGHT, fill=Y)
+
+        scroll_x.config(command=self.student_table.xview)
+        scroll_y.config(command=self.student_table.yview)
+
+        self.student_table.heading("std_ID", text="Student ID")
+        self.student_table.heading("first_name", text="First Name")
+        self.student_table.heading("last_name", text="Last Name")
+        self.student_table.heading("email", text="Email")
+        self.student_table.heading("date_of_admission", text="Date Of Admission")
+        self.student_table.heading("date_of_birth", text="Date Of Birth")
+        self.student_table.heading("father_name", text="Father's Name")
+        self.student_table.heading("father_email", text="Father Email")
+        self.student_table.heading("mother_name", text="Mother's Name")
+        self.student_table.heading("mother_email", text="Mother Email")
+        self.student_table["show"] = "headings"
+        
+        self.student_table.column("std_ID", width=68)
+        self.student_table.column("first_name", width=130)
+        self.student_table.column("last_name", width=130)
+        self.student_table.column("email", width=130)
+        self.student_table.column("date_of_admission", width=120)
+        self.student_table.column("date_of_birth", width=120)
+        self.student_table.column("father_name", width=130) 
+        self.student_table.column("father_email", width=150)
+        self.student_table.column("mother_name", width=130)
+        self.student_table.column("mother_email", width=100)
+
+        self.student_table.pack(fill=BOTH, expand=1)
 
 # This piece of code helps in calling class Face_Recognition_System
 if __name__=="__main__":

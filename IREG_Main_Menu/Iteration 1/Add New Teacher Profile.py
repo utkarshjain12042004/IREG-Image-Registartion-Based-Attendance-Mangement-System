@@ -18,7 +18,7 @@ class Add_New_Teacher_Profile:
 
         # Label Frame
         Add_New_Teacher_Profile_lbl= Label(mainFrame, text="Add New Teacher Profile", font=("Segoe UI Variable", 45, "bold"), bg="White", fg="Black")
-        Add_New_Teacher_Profile_lbl.place(x=1, y=5, width=1270, height=75) # Specifying the coordinates along with the dimensions of the frame
+        Add_New_Teacher_Profile_lbl.place(x=2, y=5, width=1270, height=75) # Specifying the coordinates along with the dimensions of the frame
 
         # Button Frame
         Button_Frame= LabelFrame(mainFrame, bd=2, bg="White", relief=RIDGE)
@@ -27,52 +27,53 @@ class Add_New_Teacher_Profile:
         # ======================================================================================================================================== #
         # Student Information frame: This frame will contain all the fields asking for information related to the student
         Teacher_Information_Frame= LabelFrame(mainFrame, bd=2, bg="White", relief=RIDGE, text="Teacher Details", font=("Segoe UI Variable", 12, "bold"))
-        Teacher_Information_Frame.place(x=5, y=85, width=826, height=200)
+        Teacher_Information_Frame.place(x=225, y=206, width=826, height=200) # Specifying the coordinates along with the dimensions of the frame
         # =================================================================== #
         # Adding in the teacher related text boxes and labels
         # Adding a teacher Id label and textbox
         teacherID_label = Label(Teacher_Information_Frame, text = "Teacher ID: ", font=("Segoe UI Variable", 12, "bold"), bg = "White")
-        teacherID_label.grid(row=0, column=0, padx=(25,5), pady=17, sticky=W)
+        teacherID_label.grid(row=0, column=0, padx=(25,5), pady=17, sticky=W) # Specifying the location of the label
 
         teacherID_textbox = ttk.Entry(Teacher_Information_Frame, width=25, font=("Segoe UI Variable", 12, "bold"))
-        teacherID_textbox.grid(row=0, column=1, padx=(25,5), pady=17, sticky=W)
+        teacherID_textbox.grid(row=0, column=1, padx=(25,5), pady=17, sticky=W)# Specifying the location of the text box
 
         # Adding a subject taught label and combobox
         subject_taught_label = Label(Teacher_Information_Frame, text = "Subject Taught: ", font=("Segoe UI Variable", 12, "bold"), bg = "White")
-        subject_taught_label.grid(row=0, column=2, padx=(25,5), pady=17, sticky=W)
+        subject_taught_label.grid(row=0, column=2, padx=(25,5), pady=17, sticky=W) # Specifying the location of the label
 
         subject_taught_combobox=ttk.Combobox(Teacher_Information_Frame, width=23, font=("Segoe UI Variable", 12, "bold"), state="readonly")
-        subject_taught_combobox["values"] = ("Select", "001", "002", "003", "004")
-        subject_taught_combobox.current(0)
-        subject_taught_combobox.grid(row=0, column=3, padx=(25,5), pady=17, sticky=W)
+        # The above line creates the combo box and makes it read only. The user will not be able to type in this box
+        subject_taught_combobox["values"] = ("Select", "001", "002", "003", "004") # Adding in the values to be shown in the drop down list
+        subject_taught_combobox.current(0) # Specifying the default item to be shown
+        subject_taught_combobox.grid(row=0, column=3, padx=(25,5), pady=17, sticky=W) # Specifying the location of the combo box
 
         # Adding a teacher Email label and textbox
         teacher_email_label = Label(Teacher_Information_Frame, text = "Email: ", font=("Segoe UI Variable", 12, "bold"), bg = "White")
-        teacher_email_label.grid(row=1, column=0, padx=(25,5), pady=17, sticky=W)
+        teacher_email_label.grid(row=1, column=0, padx=(25,5), pady=17, sticky=W) # Specifying the location of the label
       
         teacher_email_textbox = ttk.Entry(Teacher_Information_Frame, width=25, font=("Segoe UI Variable", 12, "bold"))
-        teacher_email_textbox.grid(row=1, column=1, padx=(25,5), pady=17, sticky=W)
+        teacher_email_textbox.grid(row=1, column=1, padx=(25,5), pady=17, sticky=W)# Specifying the location of the text box
       
         # Adding a first name label and textbox
         first_name_label = Label(Teacher_Information_Frame, text = "First Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "White")
-        first_name_label.grid(row=1, column=2, padx=(25,5), pady=17, sticky=W)
+        first_name_label.grid(row=1, column=2, padx=(25,5), pady=17, sticky=W) # Specifying the location of the label
 
         first_name_textbox = ttk.Entry(Teacher_Information_Frame, width=25, font=("Segoe UI Variable", 12, "bold"))
-        first_name_textbox.grid(row=1, column=3, padx=(25,5), pady=17, sticky=W)
+        first_name_textbox.grid(row=1, column=3, padx=(25,5), pady=17, sticky=W)# Specifying the location of the text box
 
         # Adding a last label and textbox
         last_name_label = Label(Teacher_Information_Frame, text = "Last Name: ", font=("Segoe UI Variable", 12, "bold"), bg = "White")
-        last_name_label.grid(row=2, column=0, padx=(25,5), pady=17, sticky=W)
+        last_name_label.grid(row=2, column=0, padx=(25,5), pady=17, sticky=W) # Specifying the location of the label
       
         last_name_textbox = ttk.Entry(Teacher_Information_Frame, width=25, font=("Segoe UI Variable", 12, "bold"))
-        last_name_textbox.grid(row=2, column=1, padx=(25,5), pady=17, sticky=W)
+        last_name_textbox.grid(row=2, column=1, padx=(25,5), pady=17, sticky=W)# Specifying the location of the text box
 
         # Adding a date of birth label and textbox
         date_of_birth_label = Label(Teacher_Information_Frame, text = "Date of Birth: ", font=("Segoe UI Variable", 12, "bold"), bg = "White")
-        date_of_birth_label.grid(row=2, column=2, padx=(25,5), pady=17, sticky=W)
+        date_of_birth_label.grid(row=2, column=2, padx=(25,5), pady=17, sticky=W) # Specifying the location of the label
 
         date_of_birth_textbox = ttk.Entry(Teacher_Information_Frame, width=25, font=("Segoe UI Variable", 12, "bold"))
-        date_of_birth_textbox.grid(row=2, column=3, padx=(25,5), pady=17, sticky=W)
+        date_of_birth_textbox.grid(row=2, column=3, padx=(25,5), pady=17, sticky=W)# Specifying the location of the text box
 
         #======================================== Adding in the buttons ========================================#
         # Add New Student Profile Button

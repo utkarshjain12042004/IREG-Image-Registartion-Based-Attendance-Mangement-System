@@ -410,7 +410,7 @@ class Student_Account_Management:
                     # Converting a Blue Green Red BGR image to grayscale form
                     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                     faces =  face_classifier.detectMultiScale(gray, 1.3, 5)
-                    # Scalinng Factor = 1.3
+                    # Scaling Factor = 1.3
                     # Minimum Neighbour = 6
                 
                     for(x,y,w,h) in faces:
