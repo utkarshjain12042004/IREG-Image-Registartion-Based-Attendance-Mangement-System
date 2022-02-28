@@ -244,7 +244,7 @@ class Student_Account_Management:
             messagebox.showerror("Error", "All fields are required", parent=self.root)
         else:
             try:
-                conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="mydb")
                 my_cursor = conn.cursor()
                 my_cursor.execute("INSERT INTO tbl_student VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(
                                                                                                          self.var_student_ID.get(),
@@ -268,7 +268,7 @@ class Student_Account_Management:
 
     # Funtion to fetch the date in the table frame created
     def fetch_data(self):
-        conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+        conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="mydb")
         my_cursor = conn.cursor()
         my_cursor.execute("SELECT * FROM tbl_student")
         data = my_cursor.fetchall()
@@ -303,7 +303,7 @@ class Student_Account_Management:
             try:
                 update = messagebox.askyesno("Update Student Account", "Do you want to update student details?", parent=self.root)
                 if update > 0:
-                    conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                    conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="mydb")
                     my_cursor = conn.cursor()
                     my_cursor.execute("UPDATE tbl_student SET First_Name=%s, Last_Name=%s, Email=%s, date_of_admission=%s, Date_Of_Birth=%s, Father_Name=%s, Father_Email=%s, Mother_Name=%s, Mother_Email=%s WHERE Student_ID=%s",(
                                                                                                          self.var_first_name.get(),
@@ -336,7 +336,7 @@ class Student_Account_Management:
             try:
                 delete = messagebox.askyesno("Delete Student Account", "Do you want to delete student account?", parent=self.root)
                 if delete > 0:
-                    conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                    conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="mydb")
                     my_cursor = conn.cursor()
                     # my_cursor.execute("DELETE FROM tbl_student WHERE Student_ID=%s", (self.var_student_ID.get()))
                     sql_query = "DELETE FROM tbl_student WHERE Student_ID=%s"
@@ -373,7 +373,7 @@ class Student_Account_Management:
         else:
             # Added a try box to get rid pf any exceptions which might arise
             try:
-                conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="mydb")
                 my_cursor = conn.cursor()
                 # Selected all the data from the database and stored it in the variable myresult
                 my_cursor.execute("SELECT * FROM tbl_student")
@@ -481,7 +481,7 @@ class Student_Account_Management:
                 messagebox.showerror("Error", "Please enter the data you want to search for in the search textbox")
         else:
             try:
-                conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="ireg")
+                conn = mysql.connector.connect(host="localhost", username="root", password="utkarshjain120", database="mydb")
                 my_cursor = conn.cursor()
                 my_cursor.execute("SELECT * FROM tbl_student WHERE " + str(self.var_search_by_combobox.get()) + " LIKE '%" + str(self.var_search.get()) + " %'")
                 data = my_cursor.fetchall()

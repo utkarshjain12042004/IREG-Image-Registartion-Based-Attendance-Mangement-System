@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\IREG_Main_Menu",
-    "\\IREG_Main_Menu\\Iteration 1"
+    "\\IREG_Main_Menu\\Iteration 3",
+    "\\IREG_Main_Menu\\Iteration 3\\Start Attendance Pages",
+    "\\IREG_Main_Menu\\Iteration 3\\View Attendance Pages",
+    "\\Previous Iterations"
   ],
-  "SelectedNode": "\\IREG_Main_Menu\\Teacher_Account_Management.py",
+  "SelectedNode": "\\IREG_Main_Menu\\Iteration 3\\Start Attendance Pages\\Conduct Attendance.py",
   "PreviewInSolutionExplorer": false
 }
